@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void flipperImage(int image) {
         ImageView imageView = new ImageView(this);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setBackgroundResource(image);
         viewFlipper.addView(imageView);
         viewFlipper.setFlipInterval(5000);
