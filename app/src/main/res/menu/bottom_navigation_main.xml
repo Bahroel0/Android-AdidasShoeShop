@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_filter"
+        android:enabled="true"
+        android:title="@string/text_filter"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_filter_list_black_24dp"/>
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:title="@string/text_home"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_home_black_24dp"/>
+    <item
+        android:id="@+id/action_sort"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/text_sort"
+        android:icon="@drawable/ic_sort_black_24dp"/>
+
+</menu>
