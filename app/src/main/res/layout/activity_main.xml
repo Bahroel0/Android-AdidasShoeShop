@@ -71,7 +71,7 @@
         android:fillViewport="false"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ViewFlipper
@@ -82,12 +82,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:background="#ccc7c7"
                 android:orientation="horizontal"
                 android:id="@+id/linearLayout1">
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/card_view1"
                     android:layout_width="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     card_view:cardCornerRadius="4dp"
@@ -113,6 +116,8 @@
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/card_view2"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -141,6 +146,8 @@
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/card_view3"
                     android:layout_width="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     card_view:cardCornerRadius="4dp"
@@ -166,10 +173,10 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="550dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/linearLayout2"
                 android:orientation="vertical"
-                android:layout_marginBottom="50dp">
+                android:layout_marginBottom="60dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
@@ -200,137 +207,23 @@
                         android:text=">>"
                         android:textColor="@color/colorPrimary"
                         android:gravity="right"
+                        android:paddingRight="10dp"
                         android:layout_marginRight="4dp"
                         android:textSize="16dp"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view4"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        card_view:cardCornerRadius="4dp"
-                        android:layout_marginRight="4dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="10"
-                                android:src="@drawable/sepatu_superstar_bw_slip_on"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR1"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR1Pr"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:gravity="left"/>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view5"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        card_view:cardCornerRadius="4dp"
-                        android:layout_marginRight="4dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="10"
-                                android:src="@drawable/sepatu_superstar_bw_slip_on"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:id="@+id/textViewNR2Pr"
-                                android:text="-"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:gravity="left"/>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view6"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        card_view:cardCornerRadius="4dp"
-                        android:layout_marginRight="4dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="10"
-                                android:src="@drawable/sepatu_superstar_bw_slip_on"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR3"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR3Pr"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:gravity="left"/>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_baru_rilis"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
+                
+                
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="18dp"
@@ -349,148 +242,14 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
                         android:text=">>"
                         android:textColor="@color/colorPrimary"
                         android:gravity="right"
                         android:layout_marginRight="4dp"
                         android:textSize="16dp"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:orientation="horizontal">
-                    <android.support.v7.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view7"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        card_view:cardCornerRadius="4dp"
-                        android:layout_marginRight="4dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="10"
-                                android:src="@drawable/sepatu_superstar_bw_slip_on"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Nizza Shoes"
-                                android:id="@+id/textViewNR4"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Wanita Original"
-                                android:id="@+id/textViewNR4Pr"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="2"
-                                android:text="Rp. 1.100.000"
-                                android:gravity="left" />
-                            <RatingBar
-                                android:theme="@style/RatingBar"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1.5"
-                                android:rating="1"
-                                android:stepSize="0.5"
-                                android:numStars="5"/>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view8"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        card_view:cardCornerRadius="4dp"
-                        android:layout_marginRight="4dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="10"
-                                android:src="@drawable/sepatu_superstar_bw_slip_on"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR5"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:id="@+id/textViewNR5Pr"
-                                android:text="-"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:gravity="left"/>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/card_view9"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        card_view:cardCornerRadius="4dp"
-                        android:layout_marginRight="4dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="10"
-                                android:src="@drawable/sepatu_superstar_bw_slip_on"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR6"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:id="@+id/textViewNR6Pr"
-                                android:gravity="left"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="-"
-                                android:gravity="left"/>
-                        </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
+                
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
