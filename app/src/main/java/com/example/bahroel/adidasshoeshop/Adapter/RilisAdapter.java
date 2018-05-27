@@ -22,7 +22,7 @@ import java.util.List;
 
 public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
     Context context;
-    ArrayList<Produk> produkList;
+    ArrayList<Produk> produkList = new ArrayList<>();
 
     public RilisAdapter(Context context, ArrayList<Produk> produkList) {
         this.context = context;
@@ -40,7 +40,6 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
         Glide.with(context)
                 .load(Constant.BASE_URL + produkList.get(position).getImage_path())
                 .override(500,500)
-//                .crossFade()
                 .into(holder.foto);
         if(produkList.get(position).getWarna().equals("Merah")){
             holder.warna.setImageResource(R.drawable.ic_warna_merah);

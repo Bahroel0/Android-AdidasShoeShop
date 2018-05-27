@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int images[] = {R.drawable.flip1,R.drawable.flip2,R.drawable.flip3};
+        int images[] = {R.drawable.flip4,R.drawable.flip1,R.drawable.flip2,R.drawable.flip3};
         scrollView = (ScrollView)findViewById(R.id.scrollView);
-        rilis = findViewById(R.id.rv_baru_rilis);
+        rilis = (RecyclerView) findViewById(R.id.rv_baru_rilis);
         RelativeLayout.LayoutParams parameter =  (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
         parameter.setMargins(0, 0, 0, 30); // left, top, right, bottom
         scrollView.setLayoutParams(parameter);
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         rilis.setHasFixedSize(true);
-        rilis.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
-        rilis.setAdapter(new RilisAdapter(MainActivity.this,produkArrayList));
+        rilis.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false));
+        rilis.setAdapter(new RilisAdapter(MainActivity.this, produkArrayList));
 
 
 

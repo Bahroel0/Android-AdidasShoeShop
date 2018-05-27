@@ -1,14 +1,27 @@
 package com.example.bahroel.adidasshoeshop.Model;
 
-public class Produk {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Produk implements Serializable{
+    @SerializedName("nama")
     private String nama;
+    @SerializedName("harga")
     private int harga;
+    @SerializedName("stok")
     private int stok;
+    @SerializedName("ukuran")
     private int ukuran;
+    @SerializedName("warna")
     private String warna;
+    @SerializedName("kategori")
     private String kategori;
+    @SerializedName("image_path")
     private String image_path;
+    @SerializedName("rating")
     private Float rating;
+    @SerializedName("deskripsi")
     private String deskripsi;
 
     public Produk(String nama, int harga, int stok, int ukuran, String warna, String kategori, String image_path, Float rating, String deskripsi) {
