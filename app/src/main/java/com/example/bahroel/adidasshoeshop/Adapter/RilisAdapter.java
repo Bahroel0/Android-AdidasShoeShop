@@ -17,8 +17,10 @@ import com.example.bahroel.adidasshoeshop.MainActivity;
 import com.example.bahroel.adidasshoeshop.Model.Produk;
 import com.example.bahroel.adidasshoeshop.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
     Context context;
@@ -52,7 +54,8 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
         }
         holder.nama.setText(produkList.get(position).getNama());
         holder.kategori.setText(produkList.get(position).getKategori());
-        holder.harga.setText(produkList.get(position).getHarga());
+        String str = NumberFormat.getNumberInstance(Locale.US).format(produkList.get(position).getHarga());
+        holder.harga.setText("Rp. "+str);
 
     }
 
@@ -74,7 +77,6 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
             nama = itemView.findViewById(R.id.tv_nama_produk);
             kategori =itemView.findViewById(R.id.tv_kategori_produk);
             harga = itemView.findViewById(R.id.tv_harga_produk);
-
         }
     }
 }

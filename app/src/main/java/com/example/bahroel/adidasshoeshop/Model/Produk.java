@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Produk implements Serializable{
+    @SerializedName("id")
+    private int id;
     @SerializedName("nama")
     private String nama;
     @SerializedName("harga")
@@ -24,7 +26,8 @@ public class Produk implements Serializable{
     @SerializedName("deskripsi")
     private String deskripsi;
 
-    public Produk(String nama, int harga, int stok, int ukuran, String warna, String kategori, String image_path, Float rating, String deskripsi) {
+    public Produk(int id,String nama, int harga, int stok, int ukuran, String warna, String kategori, String image_path, Float rating, String deskripsi) {
+        this.id= id;
         this.nama = nama;
         this.harga = harga;
         this.stok = stok;
@@ -39,6 +42,8 @@ public class Produk implements Serializable{
     public String getNama() {
         return nama;
     }
+
+    public int getId() {return id;}
 
     public void setNama(String nama) {
         this.nama = nama;

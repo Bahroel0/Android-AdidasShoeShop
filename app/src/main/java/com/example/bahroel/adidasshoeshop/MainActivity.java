@@ -52,7 +52,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
                 ProdukResponse jsonresponse = response.body();
                 produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
+                Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
 
+                rilis.setHasFixedSize(true);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+                rilis.setLayoutManager(layoutManager);
+                RilisAdapter adapter = new RilisAdapter(MainActivity.this, produkArrayList);
+
+                rilis.setAdapter(adapter);
             }
 
             @Override
@@ -61,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        rilis.setHasFixedSize(true);
-        rilis.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false));
-        rilis.setAdapter(new RilisAdapter(MainActivity.this, produkArrayList));
 
 
 
