@@ -3,6 +3,8 @@ package com.example.bahroel.adidasshoeshop.Fragment;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.bahroel.adidasshoeshop.Adapter.RilisAdapter;
@@ -35,6 +38,7 @@ public class HomeFragment extends Fragment{
     RecyclerView rilis, laris;
     ArrayList<Produk> produkArrayList= new ArrayList<>();
     Context context;
+    TextView tvLihatSemua;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View viewFrag1 = inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -43,6 +47,18 @@ public class HomeFragment extends Fragment{
         scrollView = (ScrollView)viewFrag1.findViewById(R.id.scrollView);
         rilis = (RecyclerView) viewFrag1.findViewById(R.id.rv_baru_rilis);
         laris = (RecyclerView) viewFrag1.findViewById(R.id.rv_produk_terlaris);
+        tvLihatSemua = (TextView)viewFrag1.findViewById(R.id.txt1);
+
+        tvLihatSemua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                KatalogFragment katalogFragment = new KatalogFragment();
+                FragmentManager FM = getActivity().getSupportFragmentManager();
+                FragmentTransaction FT = FM.beginTransaction();
+                FT.replace(R.id.fragment_main, katalogFragment);
+                FT.commit();
+            }
+        });
 
         viewFlipper = (ViewFlipper)viewFrag1.findViewById(R.id.viewflipper1);
         for (int image:images){

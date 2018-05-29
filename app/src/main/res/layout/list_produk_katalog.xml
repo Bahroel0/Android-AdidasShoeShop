@@ -6,12 +6,12 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_produk"
-        android:layout_width="180dp"
+        android:layout_width="120dp"
         android:padding="5dp"
         android:background="#aaa"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp"
         android:layout_height="wrap_content">
 
         <RelativeLayout
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:src="@drawable/sepatu_superstar_bw_slip_on"
                 android:scaleType="fitXY"
-                android:layout_height="150dp" />
+                android:layout_height="100dp" />
 
             <TextView
                 android:id="@+id/tv_nama_produk"
@@ -31,12 +31,14 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
                 android:text="Nizza Shoes"
+                android:textSize="11sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_kategori_produk"
                 android:layout_marginTop="5dp"
                 android:text="Wanita"
+                android:textSize="11sp"
                 android:layout_marginLeft="5dp"
                 android:layout_below="@+id/tv_nama_produk"
                 android:layout_width="wrap_content"
@@ -45,6 +47,7 @@
                 android:id="@+id/tv_harga_produk"
                 android:layout_marginTop="5dp"
                 android:text="Rp. 1.000.000"
+                android:textSize="11sp"
                 android:textColor="#232121"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
@@ -54,8 +57,8 @@
 
             <ImageView
                 android:id="@+id/iv_warna_produk"
-                android:layout_width="30dp"
-                android:layout_height="20dp"
+                android:layout_width="20dp"
+                android:layout_height="10dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/tv_kategori_produk"
                 android:layout_marginEnd="16dp"
