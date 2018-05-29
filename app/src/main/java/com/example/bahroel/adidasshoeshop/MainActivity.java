@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     ViewFlipper viewFlipper;
     ScrollView scrollView;
-    RecyclerView rilis, laris;
+    RecyclerView rilis;
     ArrayList<Produk> produkArrayList= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
