@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -45,13 +46,9 @@ public class KatalogFragment extends Fragment {
 
         BottomNavigationView navigation = (BottomNavigationView) viewFrag1.findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.getMenu().findItem(R.id.action_sort).setChecked(false);
-        navigation.getMenu().findItem(R.id.action_filter).setChecked(false);
-        navigation.getMenu().findItem(R.id.action_home).setChecked(false);
-
-        android.support.design.widget.CoordinatorLayout.LayoutParams layoutParams = (android.support.design.widget.CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
+        navigation.getMenu().findItem(R.id.action_home).setChecked(true);
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
-
 
         katalog = (RecyclerView)viewFrag1.findViewById(R.id.rv_katalog);
         ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
