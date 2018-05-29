@@ -1,87 +1,69 @@
 package com.example.bahroel.adidasshoeshop;
 
+import android.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ImageView;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.ViewFlipper;
 
-import com.example.bahroel.adidasshoeshop.Adapter.RilisAdapter;
-import com.example.bahroel.adidasshoeshop.Api.ApiInterface;
-import com.example.bahroel.adidasshoeshop.Api.ApiRequest;
-import com.example.bahroel.adidasshoeshop.Model.Produk;
-import com.example.bahroel.adidasshoeshop.Response.ProdukResponse;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.bahroel.adidasshoeshop.Behavior.BottomNavigationBehavior;
+import com.example.bahroel.adidasshoeshop.Fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
+    RelativeLayout relativeLayout;
 
-    ViewFlipper viewFlipper;
-    ScrollView scrollView;
-    RecyclerView rilis;
-    ArrayList<Produk> produkArrayList= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int images[] = {R.drawable.flip4,R.drawable.flip1,R.drawable.flip2,R.drawable.flip3};
-        scrollView = (ScrollView)findViewById(R.id.scrollView);
-        rilis = (RecyclerView) findViewById(R.id.rv_baru_rilis);
-        RelativeLayout.LayoutParams parameter =  (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-        parameter.setMargins(0, 0, 0, 30); // left, top, right, bottom
-        scrollView.setLayoutParams(parameter);
-        viewFlipper = (ViewFlipper)findViewById(R.id.viewflipper1);
-        for (int image:images){
-            flipperImage(image);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setSelectedItemId(R.id.action_home);
+        View view = navigation;
+        view.performClick();
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        android.support.design.widget.CoordinatorLayout.LayoutParams layoutParams = (android.support.design.widget.CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationBehavior());
+
+        HomeFragment home = new HomeFragment();
+        FragmentManager FM = getSupportFragmentManager();
+        FragmentTransaction FT = FM.beginTransaction();
+        FT.replace(R.id.fragment_main, home);
+        FT.commit();
+
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_home:
+                    HomeFragment home = new HomeFragment();
+                    FragmentManager FM = getSupportFragmentManager();
+                    FragmentTransaction FT = FM.beginTransaction();
+                    FT.replace(R.id.fragment_main, home);
+                    FT.commit();
+                    return true;
+                case R.id.action_filter:
+
+                    return true;
+                case R.id.action_sort:
+
+                    return true;
+            }
+            return false;
         }
+    };
 
 
-        ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-        Call<ProdukResponse> call = request.getProdukJSON();
-        call.enqueue(new Callback<ProdukResponse>() {
-            @Override
-            public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
-                ProdukResponse jsonresponse = response.body();
-                produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
-                Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
-
-                rilis.setHasFixedSize(true);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-                rilis.setLayoutManager(layoutManager);
-                RilisAdapter adapter = new RilisAdapter(MainActivity.this, produkArrayList);
-
-                rilis.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<ProdukResponse> call, Throwable t) {
-
-            }
-        });
-
-
-
-
-    }
-
-
-    private void flipperImage(int image) {
-        ImageView imageView = new ImageView(this);
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        imageView.setBackgroundResource(image);
-        viewFlipper.addView(imageView);
-        viewFlipper.setFlipInterval(5000);
-        viewFlipper.setAutoStart(true);
-        viewFlipper.setInAnimation(this,android.R.anim.slide_in_left);
-        viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
-    }
 }
