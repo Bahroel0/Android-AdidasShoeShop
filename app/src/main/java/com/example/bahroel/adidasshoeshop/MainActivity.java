@@ -25,7 +25,7 @@ import com.example.bahroel.adidasshoeshop.User.LoginActivity;
 public class MainActivity extends AppCompatActivity {
 
     ImageView imgToogle;
-    LinearLayout lnr_user, daftar, masuk;
+    LinearLayout lnr_user, daftar, masuk, lnr_user_logged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +34,21 @@ public class MainActivity extends AppCompatActivity {
 
         imgToogle = findViewById(R.id.imgMenu);
         lnr_user = findViewById(R.id.lnr_user);
+        lnr_user_logged = findViewById(R.id.lnr_user_logged);
         daftar = findViewById(R.id.lnr_daftar);
         masuk = findViewById(R.id.lnr_masuk);
         lnr_user.setVisibility(View.GONE);
+        lnr_user_logged.setVisibility(View.GONE);
 
         imgToogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lnr_user.getVisibility() == View.GONE){
+                if(lnr_user_logged.getVisibility() == View.GONE){
                     imgToogle.setImageResource(R.drawable.ic_keyboard_backspace);
-                    lnr_user.setVisibility(View.VISIBLE);
+                    lnr_user_logged.setVisibility(View.VISIBLE);
                 }else{
                     imgToogle.setImageResource(R.drawable.ic_menu);
-                    lnr_user.setVisibility(View.GONE);
+                    lnr_user_logged.setVisibility(View.GONE);
                 }
             }
         });

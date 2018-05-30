@@ -78,6 +78,7 @@
         </FrameLayout>
         <LinearLayout
             android:id="@+id/lnr_user"
+            android:visibility="gone"
             android:layout_width="170dp"
             android:orientation="vertical"
             android:layout_below="@+id/toolbar_top"
@@ -126,6 +127,103 @@
                     android:textColor="#ffffff"
                     android:text="Masuk"/>
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr_user_logged"
+            android:layout_width="170dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/toolbar_top"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="170dp"
+                android:paddingLeft="25dp"
+                android:paddingVertical="5dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_daftar"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:text="John"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="170dp"
+                android:paddingLeft="25dp"
+                android:paddingVertical="5dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_password"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:text="Ubah Password"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="170dp"
+                android:paddingLeft="25dp"
+                android:paddingVertical="5dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_riwayat"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:text="Riwayat"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="170dp"
+                android:paddingLeft="25dp"
+                android:paddingVertical="5dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_keluar"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:text="Keluar"/>
+            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
 
