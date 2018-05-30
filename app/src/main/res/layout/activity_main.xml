@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_top"
             android:layout_height="wrap_content"
@@ -66,6 +67,8 @@
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 
+
+
         <FrameLayout
             android:layout_below="@+id/toolbar_top"
             android:id="@+id/fragment_main"
@@ -73,6 +76,57 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
         </FrameLayout>
+        <LinearLayout
+            android:id="@+id/lnr_user"
+            android:layout_width="170dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/toolbar_top"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:id="@+id/lnr_daftar"
+                android:layout_width="170dp"
+                android:paddingLeft="25dp"
+                android:paddingVertical="5dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_daftar"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:text="Daftar"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:id="@+id/lnr_masuk"
+                android:layout_width="170dp"
+                android:paddingLeft="25dp"
+                android:paddingVertical="5dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_masuk"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ffffff"
+                    android:text="Masuk"/>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 
