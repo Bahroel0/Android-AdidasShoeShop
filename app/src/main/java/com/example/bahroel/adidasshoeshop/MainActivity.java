@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
         imgToogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lnr_user_logged.getVisibility() == View.GONE){
+                if(lnr_user.getVisibility() == View.GONE){
                     imgToogle.setImageResource(R.drawable.ic_keyboard_backspace);
-                    lnr_user_logged.setVisibility(View.VISIBLE);
+                    lnr_user.setVisibility(View.VISIBLE);
                 }else{
                     imgToogle.setImageResource(R.drawable.ic_menu);
-                    lnr_user_logged.setVisibility(View.GONE);
+                    lnr_user.setVisibility(View.GONE);
                 }
             }
         });
