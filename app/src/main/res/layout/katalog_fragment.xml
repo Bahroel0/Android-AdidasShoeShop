@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="3dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -11,9 +10,210 @@
         android:id="@+id/rv_katalog"
         android:clipToPadding="false"
         android:scrollbars="vertical"
+        android:padding="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
+
+
+    <LinearLayout
+        android:id="@+id/lnr_sorting"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#c8e0e8f1"
+        android:layout_marginBottom="60dp"
+        android:layout_gravity="bottom">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text=" Rating"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text=" Harga Terendah"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text=" Harga Tertinggi"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnr_filter"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="bottom">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/harga"
+                    android:layout_width="match_parent"
+                    android:text="Harga"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/lnr_harga"
+                    android:layout_below="@+id/harga"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp. min"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - "/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp. Max"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_below="@+id/lnr_harga"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Min"/>
+                    <SeekBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text=" Max"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ukuran"
+                    android:layout_width="match_parent"
+                    android:text="Ukuran"
+                    android:paddingLeft="30dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_below="@+id/ukuran"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/ic_remove_circle"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:text="  40  "
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_add_circle"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/warna"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="15dp"
+                android:text="Warna"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_below="@+id/warna"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Merah"/>
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Abu-abu"/>
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Hitam"/>
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Putih"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"

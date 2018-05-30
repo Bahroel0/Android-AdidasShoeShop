@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 
 import com.example.bahroel.adidasshoeshop.Adapter.KatalogAdapter;
 import com.example.bahroel.adidasshoeshop.Adapter.RilisAdapter;
@@ -40,6 +42,7 @@ import retrofit2.Response;
 public class KatalogFragment extends Fragment {
     RecyclerView katalog;
     ArrayList<Produk> produkArrayList= new ArrayList<>();
+    LinearLayout lnr_filter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View viewFrag1 = inflater.inflate(R.layout.katalog_fragment, container, false);
@@ -51,6 +54,8 @@ public class KatalogFragment extends Fragment {
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
         katalog = (RecyclerView)viewFrag1.findViewById(R.id.rv_katalog);
+        lnr_filter = viewFrag1.findViewById(R.id.lnr_filter);
+
         ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
         Call<ProdukResponse> call = request.getProdukJSON();
         call.enqueue(new Callback<ProdukResponse>() {
@@ -92,6 +97,13 @@ public class KatalogFragment extends Fragment {
                     FT.commit();
                     return true;
                 case R.id.action_filter:
+                    if(lnr_filter.getVisibility() == View.VISIBLE){
+                        lnr_filter.setVisibility(View.GONE);
+                        lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
+                    }else{
+                        lnr_filter.setVisibility(View.VISIBLE);
+                        lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_up));
+                    }
 
                     return true;
                 case R.id.action_sort:

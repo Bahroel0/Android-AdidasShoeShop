@@ -61,7 +61,7 @@
                         android:layout_width="25dp"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/shopping_cart"
+                        android:src="@drawable/shopping_cart_02"
                         android:layout_height="25dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -132,6 +132,7 @@
         <LinearLayout
             android:id="@+id/lnr_user_logged"
             android:layout_width="170dp"
+            android:visibility="gone"
             android:orientation="vertical"
             android:layout_below="@+id/toolbar_top"
             android:layout_height="wrap_content">
