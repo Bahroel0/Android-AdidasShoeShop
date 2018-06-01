@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment{
 
 
         ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-        Call<ProdukResponse> call = request.getProdukJSON();
+        Call<ProdukResponse> call = request.getProdukJSON(1);
         call.enqueue(new Callback<ProdukResponse>() {
             @Override
             public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {

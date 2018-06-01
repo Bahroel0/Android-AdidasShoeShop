@@ -226,5 +226,15 @@
         app:menu="@menu/bottom_navigation_main">
     </android.support.design.widget.BottomNavigationView>
 
+    <include
+        android:id="@+id/loadItemsLayout_recyclerView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        layout="@layout/load_more"
+        android:visibility="gone"
+        />
+
+
     
 </android.support.design.widget.CoordinatorLayout>
