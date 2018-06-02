@@ -67,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/edtUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -75,6 +76,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/bordersignup"/>
         <EditText
+            android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -83,6 +85,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/bordersignup"/>
         <EditText
+            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -91,6 +94,7 @@
             android:hint="Password"
             android:background="@drawable/bordersignup"/>
         <EditText
+            android:id="@+id/edtKonfPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -99,6 +103,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/bordersignup"/>
         <Button
+            android:id="@+id/btnDaftar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="20dp"
