@@ -27,7 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".User.DaftarActivity" />
-        <activity android:name=".User.LoginActivity"></activity>
+        <activity android:name=".User.LoginActivity" />
+        <activity android:name=".User.GantiPasswordActivity" />
+        <activity android:name=".DeskripsiProdukActivity"></activity>
     </application>
 
 </manifest>
