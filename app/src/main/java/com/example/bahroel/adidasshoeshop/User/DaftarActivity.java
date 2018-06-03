@@ -104,6 +104,7 @@ public class DaftarActivity extends AppCompatActivity {
                                     RealmController.with(DaftarActivity.this).refresh();
 
                                     // move to main activity
+                                    Toast.makeText(DaftarActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(DaftarActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);

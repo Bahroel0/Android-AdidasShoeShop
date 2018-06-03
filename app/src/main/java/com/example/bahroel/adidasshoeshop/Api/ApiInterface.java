@@ -20,7 +20,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<UserResponse> login(@Field("email") String email, @Field("password") String password);
 
-
+    @POST("api/update")
+    @FormUrlEncoded
+    Call<UserResponse> update(@Field("id") int id, @Field("password") String password, @Field("api_token") String api_token);
 
     @GET("api/getAllProduk")
     Call<ProdukResponse> getProdukJSON(@Query("page") int page);

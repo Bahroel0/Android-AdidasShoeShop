@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                 RealmController.with(LoginActivity.this).refresh();
 
                                 // move to main activity
+                                Toast.makeText(LoginActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
