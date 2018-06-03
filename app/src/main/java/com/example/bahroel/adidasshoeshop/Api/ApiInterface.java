@@ -16,6 +16,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<UserResponse> register(@Field("email") String email, @Field("password") String password);
 
+    @POST("api/login")
+    @FormUrlEncoded
+    Call<UserResponse> login(@Field("email") String email, @Field("password") String password);
 
 
 

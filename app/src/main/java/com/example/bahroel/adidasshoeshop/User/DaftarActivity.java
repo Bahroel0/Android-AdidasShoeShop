@@ -15,12 +15,16 @@ import com.example.bahroel.adidasshoeshop.Api.ApiInterface;
 import com.example.bahroel.adidasshoeshop.Api.ApiRequest;
 import com.example.bahroel.adidasshoeshop.MainActivity;
 import com.example.bahroel.adidasshoeshop.Model.User;
+import com.example.bahroel.adidasshoeshop.Model.UserLogged;
 import com.example.bahroel.adidasshoeshop.R;
+import com.example.bahroel.adidasshoeshop.Realm.RealmController;
 import com.example.bahroel.adidasshoeshop.Response.ProdukResponse;
 import com.example.bahroel.adidasshoeshop.Response.UserResponse;
 
 import java.util.Arrays;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +34,7 @@ public class DaftarActivity extends AppCompatActivity {
     ImageView back;
     EditText edtUsername,edtEmail,edtPassword,edtKonfPassword;
     Button btnDaftar;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class DaftarActivity extends AppCompatActivity {
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = edtUsername.getText().toString().trim();
+                final String username = edtUsername.getText().toString().trim();
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 String konfpass = edtKonfPassword.getText().toString().trim();
@@ -78,19 +83,41 @@ public class DaftarActivity extends AppCompatActivity {
 
                 if (password.equals(konfpass)){
                     // request to server
-                    ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                    final ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
                     Call<UserResponse> call = request.register(email,password);
                     call.enqueue(new Callback<UserResponse>() {
                         @Override
                         public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                            UserResponse jsonresponse = response.body();
-                            User user = new User(jsonresponse.getUser().getId(), jsonresponse.getUser().getEmail(),jsonresponse.getUser().getApi_token(),jsonresponse.getUser().getRemember_token());
-                            
+                            if(response.isSuccessful()){
+                                UserResponse jsonresponse = response.body();
+                                // store cache to realm
+                                if(jsonresponse.isSuccess()){
+                                    realm = RealmController.with(DaftarActivity.this).getRealm();
+                                    RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
+                                    realm.beginTransaction();
+                                    result.get(0).setId(jsonresponse.getUser().getId());
+                                    result.get(0).setUsername(username);
+                                    result.get(0).setApi_token(jsonresponse.getUser().getApi_token());
+                                    result.get(0).setRemember_token(jsonresponse.getUser().getRemember_token());
+                                    realm.commitTransaction();
+
+                                    RealmController.with(DaftarActivity.this).refresh();
+
+                                    // move to main activity
+                                    Intent intent = new Intent(DaftarActivity.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(DaftarActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();
+                                }
+                            }else{
+                                Toast.makeText(DaftarActivity.this,"Koneksi ke server gagal",Toast.LENGTH_LONG).show();
+                            }
                         }
 
                         @Override
                         public void onFailure(Call<UserResponse> call, Throwable t) {
-
+                            Toast.makeText(DaftarActivity.this,"Koneksi ke server gagal",Toast.LENGTH_LONG).show();
                         }
                     });
 

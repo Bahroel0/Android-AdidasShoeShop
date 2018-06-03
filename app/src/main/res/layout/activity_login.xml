@@ -67,14 +67,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/edtEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingVertical="10dp"
-            android:hint="Username"
+            android:hint="Email"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bordersignup"/>
         <EditText
+            android:id="@+id/edtPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -84,6 +86,7 @@
             android:background="@drawable/bordersignup"/>
 
         <Button
+            android:id="@+id/btnMasuk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="20dp"

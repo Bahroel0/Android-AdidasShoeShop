@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
 
+import com.example.bahroel.adidasshoeshop.Model.User;
+import com.example.bahroel.adidasshoeshop.Model.UserLogged;
+
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class RealmController {
     private static RealmController instance;
@@ -53,4 +57,16 @@ public class RealmController {
 
         realm.refresh();
     }
+
+    public void logout() {
+        realm.beginTransaction();
+        realm.clear(UserLogged.class);
+        realm.commitTransaction();
+    }
+
+    public RealmResults<UserLogged> getUserLogged(){
+        return realm.where(UserLogged.class).findAll();
+    }
+
+
 }

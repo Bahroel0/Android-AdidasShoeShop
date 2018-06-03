@@ -152,6 +152,7 @@
                     android:src="@drawable/ic_daftar"
                     android:layout_height="20dp" />
                 <TextView
+                    android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -164,6 +165,7 @@
                 android:background="#ffffff"
                 android:layout_height="1dp"/>
             <LinearLayout
+                android:id="@+id/btn_ubah_password"
                 android:layout_width="170dp"
                 android:paddingLeft="25dp"
                 android:paddingVertical="5dp"
@@ -186,6 +188,7 @@
                 android:background="#ffffff"
                 android:layout_height="1dp"/>
             <LinearLayout
+                android:id="@+id/btn_riwayat"
                 android:layout_width="170dp"
                 android:paddingLeft="25dp"
                 android:paddingVertical="5dp"
@@ -208,6 +211,7 @@
                 android:background="#ffffff"
                 android:layout_height="1dp"/>
             <LinearLayout
+                android:id="@+id/btn_keluar"
                 android:layout_width="170dp"
                 android:paddingLeft="25dp"
                 android:paddingVertical="5dp"
