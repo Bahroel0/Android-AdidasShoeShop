@@ -55,12 +55,13 @@ public class KatalogFragment extends Fragment {
     private KatalogAdapter adapter;
     private static LinearLayoutManager layoutManager;
 
-    String kategori;
+    String kategori, searchkey;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View viewFrag1 = inflater.inflate(R.layout.katalog_fragment, container, false);
 
         kategori = getArguments().getString("kategori");
+        searchkey = getArguments().getString("searchkey").toLowerCase();
         BottomNavigationView navigation = (BottomNavigationView) viewFrag1.findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().findItem(R.id.action_home).setChecked(true);
@@ -176,6 +177,42 @@ public class KatalogFragment extends Fragment {
 
                 }
             });
+        }else if(kategori.equals("Search")){
+
+
+            ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+            Call<ProdukResponse> call = request.getSearchJSON(""+searchkey,1);
+            call.enqueue(new Callback<ProdukResponse>() {
+                @Override
+                public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                    ProdukResponse jsonresponse = response.body();
+                    last_page = jsonresponse.getLast_page();
+                    produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
+
+                    if (produkArrayList.size()==0){
+                        Toast.makeText(getActivity(), "Pencarian " + searchkey + " tidak ditemukan", Toast.LENGTH_SHORT).show();
+                        HomeFragment home = new HomeFragment();
+                        FragmentManager FM = getActivity().getSupportFragmentManager();
+                        FragmentTransaction FT = FM.beginTransaction();
+                        FT.replace(R.id.fragment_main, home);
+                        FT.commit();
+                    }
+
+                    katalog.setHasFixedSize(true);
+                    layoutManager = new GridLayoutManager(getActivity(), 3);
+                    katalog.setLayoutManager(layoutManager);
+                    katalog.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+                    katalog.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new KatalogAdapter(getActivity(), produkArrayList);
+                    katalog.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                }
+            });
         }
 
 
@@ -244,7 +281,7 @@ public class KatalogFragment extends Fragment {
                     });
                 }else if(kategori.equals("Wanita")){
                     ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Wanita",page);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Wanita", page);
                     call.enqueue(new Callback<ProdukResponse>() {
                         @Override
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
@@ -269,7 +306,7 @@ public class KatalogFragment extends Fragment {
                     });
                 }else if(kategori.equals("pria")){
                     ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Pria",page);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Pria", page);
                     call.enqueue(new Callback<ProdukResponse>() {
                         @Override
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
@@ -294,7 +331,32 @@ public class KatalogFragment extends Fragment {
                     });
                 }else if(kategori.equals("anak")){
                     ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak",page);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak", page);
+                    call.enqueue(new Callback<ProdukResponse>() {
+                        @Override
+                        public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                            ProdukResponse jsonresponse = response.body();
+                            int the_last = jsonresponse.getCurrentPage();
+                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
+                            }
+                            adapter.notifyDataSetChanged();
+
+                            // After adding new data hide the view.
+                            bottomLayout.setVisibility(View.GONE);
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                        }
+                    });
+                }else if(kategori.equals("Search")){
+                    ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                    Call<ProdukResponse> call = request.getSearchJSON(""+searchkey, page);
                     call.enqueue(new Callback<ProdukResponse>() {
                         @Override
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {

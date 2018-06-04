@@ -10,9 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 import com.example.bahroel.adidasshoeshop.App.Prefs;
 import com.example.bahroel.adidasshoeshop.Behavior.BottomNavigationBehavior;
 import com.example.bahroel.adidasshoeshop.Fragment.HomeFragment;
+import com.example.bahroel.adidasshoeshop.Fragment.KatalogFragment;
 import com.example.bahroel.adidasshoeshop.Model.UserLogged;
 import com.example.bahroel.adidasshoeshop.Realm.RealmController;
 import com.example.bahroel.adidasshoeshop.User.DaftarActivity;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgToogle;
     TextView tv_username;
     LinearLayout lnr_user, daftar, masuk, lnr_user_logged, btn_ubah_password, btn_riwayat, btn_keluar;
+    EditText edtSearch;
+    ImageView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +59,34 @@ public class MainActivity extends AppCompatActivity {
         btn_keluar = findViewById(R.id.btn_keluar);
         lnr_user.setVisibility(View.GONE);
         lnr_user_logged.setVisibility(View.GONE);
+        edtSearch = findViewById(R.id.edtSearch);
+        search = findViewById(R.id.search_close_btnsearch);
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(realmConfiguration);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchkey = edtSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(searchkey)){
+                    edtSearch.setError("Masukkan kata kunci");
+                    edtSearch.requestFocus();
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putString("kategori","Search");
+                bundle.putString("searchkey", searchkey);
+                KatalogFragment katalogFragment = new KatalogFragment();
+                katalogFragment.setArguments(bundle);
+
+                FragmentManager FM = MainActivity.this.getSupportFragmentManager();
+                FragmentTransaction FT = FM.beginTransaction();
+                FT.replace(R.id.fragment_main, katalogFragment);
+                FT.commit();
+
+            }
+        });
 
         try{
             realm = RealmController.with(MainActivity.this).getRealm();

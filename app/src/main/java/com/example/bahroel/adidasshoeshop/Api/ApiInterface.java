@@ -29,5 +29,8 @@ public interface ApiInterface {
     @GET("api/getAllProduk")
     Call<ProdukResponse> getProdukJSON(@Query("page") int page);
     @GET("api/getKategoriProduk")
-    Call<ProdukResponse> getKategoriProdukJSON(@Query("kategori") String searchkey, @Query("page") int page);
+    Call<ProdukResponse> getKategoriProdukJSON(@Query("kategori") String kategori, @Query("page") int page);
+    @GET("api/find")
+    Call<ProdukResponse> getSearchJSON(@Query("searchkey") String searchkey, @Query("page") int page);
+
 }
