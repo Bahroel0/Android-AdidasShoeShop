@@ -24,6 +24,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<UserResponse> update(@Field("id") int id, @Field("password") String password, @Field("api_token") String api_token);
 
+
+    // produk request
     @GET("api/getAllProduk")
     Call<ProdukResponse> getProdukJSON(@Query("page") int page);
+    @GET("api/getKategoriProduk")
+    Call<ProdukResponse> getKategoriProdukJSON(@Query("kategori") String searchkey, @Query("page") int page);
 }

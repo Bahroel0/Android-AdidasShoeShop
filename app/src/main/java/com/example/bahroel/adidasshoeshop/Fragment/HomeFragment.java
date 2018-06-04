@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment{
     RecyclerView rilis, laris;
     ArrayList<Produk> produkArrayList= new ArrayList<>();
     Context context;
-    TextView tvLihatSemua;
+    TextView tvLihatSemua,wanita,pria,anak;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View viewFrag1 = inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -48,11 +48,66 @@ public class HomeFragment extends Fragment{
         rilis = (RecyclerView) viewFrag1.findViewById(R.id.rv_baru_rilis);
         laris = (RecyclerView) viewFrag1.findViewById(R.id.rv_produk_terlaris);
         tvLihatSemua = (TextView)viewFrag1.findViewById(R.id.txt1);
+        wanita = viewFrag1.findViewById(R.id.wanita);
+        pria = viewFrag1.findViewById(R.id.pria);
+        anak = viewFrag1.findViewById(R.id.anak);
+
+        wanita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("kategori","Wanita");
+                KatalogFragment katalogFragment = new KatalogFragment();
+                katalogFragment.setArguments(bundle);
+
+                FragmentManager FM = getActivity().getSupportFragmentManager();
+                FragmentTransaction FT = FM.beginTransaction();
+                FT.replace(R.id.fragment_main, katalogFragment);
+                FT.commit();
+            }
+        });
+
+        pria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("kategori","Pria");
+                KatalogFragment katalogFragment = new KatalogFragment();
+                katalogFragment.setArguments(bundle);
+
+                FragmentManager FM = getActivity().getSupportFragmentManager();
+                FragmentTransaction FT = FM.beginTransaction();
+                FT.replace(R.id.fragment_main, katalogFragment);
+                FT.commit();
+            }
+        });
+
+
+        anak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("kategori","Anak");
+                KatalogFragment katalogFragment = new KatalogFragment();
+                katalogFragment.setArguments(bundle);
+
+                FragmentManager FM = getActivity().getSupportFragmentManager();
+                FragmentTransaction FT = FM.beginTransaction();
+                FT.replace(R.id.fragment_main, katalogFragment);
+                FT.commit();
+            }
+        });
+
+
 
         tvLihatSemua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("kategori","semua");
                 KatalogFragment katalogFragment = new KatalogFragment();
+                katalogFragment.setArguments(bundle);
+
                 FragmentManager FM = getActivity().getSupportFragmentManager();
                 FragmentTransaction FT = FM.beginTransaction();
                 FT.replace(R.id.fragment_main, katalogFragment);

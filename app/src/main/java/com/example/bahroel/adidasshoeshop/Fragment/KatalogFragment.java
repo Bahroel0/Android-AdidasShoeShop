@@ -48,16 +48,19 @@ public class KatalogFragment extends Fragment {
     int last_page;
     int page = 2;
     ArrayList<Produk> produkArrayList= new ArrayList<>();
-    LinearLayout lnr_filter;
+    LinearLayout lnr_filter, lnr_sort;
     boolean userScrolled = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private static RelativeLayout bottomLayout;
     private KatalogAdapter adapter;
     private static LinearLayoutManager layoutManager;
 
+    String kategori;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View viewFrag1 = inflater.inflate(R.layout.katalog_fragment, container, false);
 
+        kategori = getArguments().getString("kategori");
         BottomNavigationView navigation = (BottomNavigationView) viewFrag1.findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().findItem(R.id.action_home).setChecked(true);
@@ -67,32 +70,113 @@ public class KatalogFragment extends Fragment {
 
         katalog = (RecyclerView)viewFrag1.findViewById(R.id.rv_katalog);
         lnr_filter = viewFrag1.findViewById(R.id.lnr_filter);
+        lnr_sort = viewFrag1.findViewById(R.id.lnr_sorting);
 
-        ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-        Call<ProdukResponse> call = request.getProdukJSON(1);
-        call.enqueue(new Callback<ProdukResponse>() {
-            @Override
-            public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
-                ProdukResponse jsonresponse = response.body();
-                last_page = jsonresponse.getLast_page();
-                produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
-                Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
+        if(kategori.equals("semua")){
+            ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+            Call<ProdukResponse> call = request.getProdukJSON(1);
+            call.enqueue(new Callback<ProdukResponse>() {
+                @Override
+                public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                    ProdukResponse jsonresponse = response.body();
+                    last_page = jsonresponse.getLast_page();
+                    produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
+                    Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
 
-                katalog.setHasFixedSize(true);
-                layoutManager = new GridLayoutManager(getActivity(), 2);
-                katalog.setLayoutManager(layoutManager);
-                katalog.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
-                katalog.setItemAnimator(new DefaultItemAnimator());
-                adapter = new KatalogAdapter(getActivity(), produkArrayList);
-                katalog.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
+                    katalog.setHasFixedSize(true);
+                    layoutManager = new GridLayoutManager(getActivity(), 3);
+                    katalog.setLayoutManager(layoutManager);
+                    katalog.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+                    katalog.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new KatalogAdapter(getActivity(), produkArrayList);
+                    katalog.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
 
-            @Override
-            public void onFailure(Call<ProdukResponse> call, Throwable t) {
+                @Override
+                public void onFailure(Call<ProdukResponse> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }else if(kategori.equals("Wanita")){
+            ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+            Call<ProdukResponse> call = request.getKategoriProdukJSON("Wanita",1);
+            call.enqueue(new Callback<ProdukResponse>() {
+                @Override
+                public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                    ProdukResponse jsonresponse = response.body();
+                    last_page = jsonresponse.getLast_page();
+                    produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
+//                    Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
+
+                    katalog.setHasFixedSize(true);
+                    layoutManager = new GridLayoutManager(getActivity(), 3);
+                    katalog.setLayoutManager(layoutManager);
+                    katalog.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+                    katalog.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new KatalogAdapter(getActivity(), produkArrayList);
+                    katalog.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                }
+            });
+        }else if(kategori.equals("Pria")){
+            ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+            Call<ProdukResponse> call = request.getKategoriProdukJSON("Pria",1);
+            call.enqueue(new Callback<ProdukResponse>() {
+                @Override
+                public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                    ProdukResponse jsonresponse = response.body();
+                    last_page = jsonresponse.getLast_page();
+                    produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
+//                    Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
+
+                    katalog.setHasFixedSize(true);
+                    layoutManager = new GridLayoutManager(getActivity(), 3);
+                    katalog.setLayoutManager(layoutManager);
+                    katalog.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+                    katalog.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new KatalogAdapter(getActivity(), produkArrayList);
+                    katalog.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                }
+            });
+        }else if(kategori.equals("Anak")){
+            ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+            Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak",1);
+            call.enqueue(new Callback<ProdukResponse>() {
+                @Override
+                public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                    ProdukResponse jsonresponse = response.body();
+                    last_page = jsonresponse.getLast_page();
+                    produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
+//                    Log.d(MainActivity.class.getSimpleName(),"nilai produk : " + produkArrayList.get(0).getNama() );
+
+                    katalog.setHasFixedSize(true);
+                    layoutManager = new GridLayoutManager(getActivity(), 3);
+                    katalog.setLayoutManager(layoutManager);
+                    katalog.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+                    katalog.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new KatalogAdapter(getActivity(), produkArrayList);
+                    katalog.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                }
+            });
+        }
 
 
         // impelement scroll listener
@@ -133,30 +217,107 @@ public class KatalogFragment extends Fragment {
 
             @Override
             public void run() {
-                ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-                Call<ProdukResponse> call = request.getProdukJSON(page);
-                call.enqueue(new Callback<ProdukResponse>() {
-                    @Override
-                    public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
-                        ProdukResponse jsonresponse = response.body();
-                        int the_last = jsonresponse.getCurrentPage();
-                        if(jsonresponse.getProduks() == null || the_last == last_page){
-                            Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
-                        }else{
-                            produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
+                if(kategori.equals("semua")){
+                    ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                    Call<ProdukResponse> call = request.getProdukJSON(page);
+                    call.enqueue(new Callback<ProdukResponse>() {
+                        @Override
+                        public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                            ProdukResponse jsonresponse = response.body();
+                            int the_last = jsonresponse.getCurrentPage();
+                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
+                            }
+                            adapter.notifyDataSetChanged();
+
+                            // After adding new data hide the view.
+                            bottomLayout.setVisibility(View.GONE);
+
                         }
-                        adapter.notifyDataSetChanged();
 
-                        // After adding new data hide the view.
-                        bottomLayout.setVisibility(View.GONE);
+                        @Override
+                        public void onFailure(Call<ProdukResponse> call, Throwable t) {
 
-                    }
+                        }
+                    });
+                }else if(kategori.equals("Wanita")){
+                    ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Wanita",page);
+                    call.enqueue(new Callback<ProdukResponse>() {
+                        @Override
+                        public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                            ProdukResponse jsonresponse = response.body();
+                            int the_last = jsonresponse.getCurrentPage();
+                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
+                            }
+                            adapter.notifyDataSetChanged();
 
-                    @Override
-                    public void onFailure(Call<ProdukResponse> call, Throwable t) {
+                            // After adding new data hide the view.
+                            bottomLayout.setVisibility(View.GONE);
 
-                    }
-                });
+                        }
+
+                        @Override
+                        public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                        }
+                    });
+                }else if(kategori.equals("pria")){
+                    ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Pria",page);
+                    call.enqueue(new Callback<ProdukResponse>() {
+                        @Override
+                        public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                            ProdukResponse jsonresponse = response.body();
+                            int the_last = jsonresponse.getCurrentPage();
+                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
+                            }
+                            adapter.notifyDataSetChanged();
+
+                            // After adding new data hide the view.
+                            bottomLayout.setVisibility(View.GONE);
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                        }
+                    });
+                }else if(kategori.equals("anak")){
+                    ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak",page);
+                    call.enqueue(new Callback<ProdukResponse>() {
+                        @Override
+                        public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
+                            ProdukResponse jsonresponse = response.body();
+                            int the_last = jsonresponse.getCurrentPage();
+                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
+                            }
+                            adapter.notifyDataSetChanged();
+
+                            // After adding new data hide the view.
+                            bottomLayout.setVisibility(View.GONE);
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ProdukResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
                 bottomLayout.setVisibility(View.GONE);
                 page += 1;
             }
@@ -180,15 +341,27 @@ public class KatalogFragment extends Fragment {
                 case R.id.action_filter:
                     if(lnr_filter.getVisibility() == View.VISIBLE){
                         lnr_filter.setVisibility(View.GONE);
+                        lnr_sort.setVisibility(View.GONE);
+                        lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
                         lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
                     }else{
                         lnr_filter.setVisibility(View.VISIBLE);
+                        lnr_sort.setVisibility(View.GONE);
                         lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_up));
                     }
 
                     return true;
                 case R.id.action_sort:
-
+                    if(lnr_sort.getVisibility() == View.VISIBLE){
+                        lnr_sort.setVisibility(View.GONE);
+                        lnr_filter.setVisibility(View.GONE);
+                        lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
+                        lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
+                    }else{
+                        lnr_sort.setVisibility(View.VISIBLE);
+                        lnr_filter.setVisibility(View.GONE);
+                        lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_up));
+                    }
                     return true;
             }
             return false;

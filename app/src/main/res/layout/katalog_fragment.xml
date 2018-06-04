@@ -22,35 +22,36 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#c8e0e8f1"
-        android:layout_marginBottom="60dp"
+        android:background="@drawable/background_sorting"
+        android:layout_marginBottom="55dp"
         android:layout_gravity="bottom">
 
         <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="wrap_content">
-            <RadioButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text=" Rating"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text=" Harga Terendah"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text=" Harga Tertinggi"/>
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text=" Rating"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text=" Harga Terendah - Tertinggi"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text=" Harga Tertinggi - Terendah"/>
 
-        </RadioGroup>
+            </RadioGroup>
+
 
     </LinearLayout>
 
@@ -216,6 +217,7 @@
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
+
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
