@@ -83,6 +83,7 @@
             android:paddingVertical="10dp"
             android:hint="Email"
             android:layout_marginBottom="10dp"
+            android:inputType="textEmailAddress"
             android:background="@drawable/bordersignup"/>
         <EditText
             android:id="@+id/edtPassword"
@@ -92,11 +93,13 @@
             android:paddingVertical="10dp"
             android:layout_marginBottom="10dp"
             android:hint="Password"
+            android:inputType="textPassword"
             android:background="@drawable/bordersignup"/>
         <EditText
             android:id="@+id/edtKonfPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:paddingVertical="10dp"
             android:hint="Konfirmasi Password"
