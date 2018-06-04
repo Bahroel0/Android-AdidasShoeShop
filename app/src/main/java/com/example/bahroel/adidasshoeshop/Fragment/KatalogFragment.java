@@ -65,7 +65,7 @@ public class KatalogFragment extends Fragment {
         View viewFrag1 = inflater.inflate(R.layout.katalog_fragment, container, false);
 
         kategori = getArguments().getString("kategori");
-        searchkey = getArguments().getString("searchkey").toLowerCase();
+
         BottomNavigationView navigation = (BottomNavigationView) viewFrag1.findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().findItem(R.id.action_home).setChecked(true);
@@ -183,6 +183,7 @@ public class KatalogFragment extends Fragment {
                 }
             });
         }else if(kategori.equals("Search")){
+            searchkey = getArguments().getString("searchkey").toLowerCase();
             final Dialog dialog = new Dialog(getActivity());
             dialog.getWindow();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
