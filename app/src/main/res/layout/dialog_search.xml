@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:src=""
-        android:layout_width="300dp"
+        android:src="@drawable/mencari"
+        android:layout_width="350dp"
         android:layout_height="300dp" />
 </LinearLayout>

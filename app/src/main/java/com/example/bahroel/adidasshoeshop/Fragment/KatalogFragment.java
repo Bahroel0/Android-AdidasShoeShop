@@ -1,7 +1,10 @@
 package com.example.bahroel.adidasshoeshop.Fragment;
 
+import android.app.Dialog;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -20,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
@@ -48,7 +52,7 @@ public class KatalogFragment extends Fragment {
     int last_page;
     int page = 2;
     ArrayList<Produk> produkArrayList= new ArrayList<>();
-    LinearLayout lnr_filter, lnr_sort;
+    LinearLayout lnr_filter, lnr_sort, lnr_no_produk;
     boolean userScrolled = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private static RelativeLayout bottomLayout;
@@ -72,6 +76,7 @@ public class KatalogFragment extends Fragment {
         katalog = (RecyclerView)viewFrag1.findViewById(R.id.rv_katalog);
         lnr_filter = viewFrag1.findViewById(R.id.lnr_filter);
         lnr_sort = viewFrag1.findViewById(R.id.lnr_sorting);
+        lnr_no_produk = viewFrag1.findViewById(R.id.lnr_no_produk);
 
         if(kategori.equals("semua")){
             ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
@@ -178,7 +183,13 @@ public class KatalogFragment extends Fragment {
                 }
             });
         }else if(kategori.equals("Search")){
-
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.getWindow();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_search);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
 
             ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
             Call<ProdukResponse> call = request.getSearchJSON(""+searchkey,1);
@@ -190,12 +201,28 @@ public class KatalogFragment extends Fragment {
                     produkArrayList = new ArrayList<>(Arrays.asList(jsonresponse.getProduks()));
 
                     if (produkArrayList.size()==0){
-                        Toast.makeText(getActivity(), "Pencarian " + searchkey + " tidak ditemukan", Toast.LENGTH_SHORT).show();
-                        HomeFragment home = new HomeFragment();
-                        FragmentManager FM = getActivity().getSupportFragmentManager();
-                        FragmentTransaction FT = FM.beginTransaction();
-                        FT.replace(R.id.fragment_main, home);
-                        FT.commit();
+                        // dialog handler
+                        Handler handler = null;
+                        handler = new Handler();
+                        handler.postDelayed(new Runnable(){
+                            public void run(){
+                                dialog.dismiss();
+                            }
+                        }, 1000);
+
+                        // exception
+                        lnr_no_produk.setVisibility(View.VISIBLE);
+
+                    }else{
+                        Handler handler = null;
+                        handler = new Handler();
+                        handler.postDelayed(new Runnable(){
+                            public void run(){
+                                dialog.dismiss();
+                            }
+                        }, 1000);
+                        // exception
+//                        Toast.makeText(getActivity(), "Pencarian " + searchkey + " ditemukan", Toast.LENGTH_SHORT).show();
                     }
 
                     katalog.setHasFixedSize(true);
