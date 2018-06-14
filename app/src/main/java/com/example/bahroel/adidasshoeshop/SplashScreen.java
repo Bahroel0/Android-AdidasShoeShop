@@ -16,6 +16,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 android.content.Intent i = new android.content.Intent(SplashScreen.this, MainActivity.class);
                 i.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("from",1);
                 startActivity(i);
                 finish();
             }

@@ -191,13 +191,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        Bundle bun = getIntent().getExtras();
+        int kondisi = bun.getInt("from");
+
+        if(kondisi == 0){
+            Bundle bundle = new Bundle();
+            bundle.putString("kategori","semua");
+            KatalogFragment katalogFragment = new KatalogFragment();
+            katalogFragment.setArguments(bundle);
+
+            FragmentManager FM = MainActivity.this.getSupportFragmentManager();
+            FragmentTransaction FT = FM.beginTransaction();
+            FT.replace(R.id.fragment_main, katalogFragment);
+            FT.commit();
+        }else{
+            HomeFragment home = new HomeFragment();
+            FragmentManager FM = getSupportFragmentManager();
+            FragmentTransaction FT = FM.beginTransaction();
+            FT.replace(R.id.fragment_main, home);
+            FT.commit();
+        }
 
 
-        HomeFragment home = new HomeFragment();
-        FragmentManager FM = getSupportFragmentManager();
-        FragmentTransaction FT = FM.beginTransaction();
-        FT.replace(R.id.fragment_main, home);
-        FT.commit();
+
 
     }
 

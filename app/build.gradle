@@ -26,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -53,4 +54,10 @@ dependencies {
 
     // realm
     implementation 'io.realm:realm-android:0.87.4'
+
+    // stepper touch
+    implementation 'com.github.DanielMartinus:Stepper-Touch:0.6'
+
+    // progress dialog
+    implementation 'com.wang.avi:library:2.1.3'
 }

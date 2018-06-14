@@ -47,6 +47,8 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/scrollDescripton"
+        android:visibility="gone"
         android:layout_below="@+id/toolbar_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -146,24 +148,52 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginVertical="5dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="50dp">
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="ini untuk ukuran dan jumlah"
-                        android:layout_height="wrap_content" />
+                        android:id="@+id/tv_size_detail"
+                        android:layout_weight="2"
+                        android:text="Size 41"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_weight="2"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="65dp">
+
+                        <nl.dionsegijn.steppertouch.StepperTouch
+                            android:id="@+id/stepper"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            >
+
+                        </nl.dionsegijn.steppertouch.StepperTouch>
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/stockHabis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         android:text="Stok Habis"
+                        android:textAlignment="textEnd"
+                        android:layout_marginRight="50dp"
                         android:textStyle="bold"
                         android:textColor="#ed1b1b"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
@@ -217,6 +247,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_detail_nama_down"
                     android:textStyle="bold"
                     android:textColor="#0b0b0b"
                     android:textSize="25sp"
@@ -229,13 +260,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_des_detail"
                     android:text="A Drawable that changes the size of another Drawable based on its current level value. You can control how much the child Drawable changes in width and height based on the level, as well as a gravity to control where it is placed in its overall container. Most often used to implement things like progress bars"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    
+
+    <RelativeLayout
+        android:id="@+id/bg_avi"
+        
+        android:background="#FFFFFF"
+        android:layout_below="@+id/toolbar_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_centerInParent="true"
+            android:layout_marginTop="100dp"
+
+            android:id="@+id/avi_progress_dialog"
+            app:indicatorColor="@color/colorPrimary"
+            app:indicatorName="BallClipRotatePulseIndicator"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 
 </RelativeLayout>
