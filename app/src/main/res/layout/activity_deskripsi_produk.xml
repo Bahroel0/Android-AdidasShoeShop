@@ -270,7 +270,6 @@
 
     <RelativeLayout
         android:id="@+id/bg_avi"
-        
         android:background="#FFFFFF"
         android:layout_below="@+id/toolbar_top"
         android:layout_width="match_parent"

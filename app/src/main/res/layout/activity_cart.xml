@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CartActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="0dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/imgMenu"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_keyboard_backspace"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:text="Keranjang Saya"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/scrollDescripton"
+        android:layout_below="@+id/toolbar_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:text="Total"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="Rp. 1000.000"
+                        android:textSize="18sp"
+                        android:textColor="#333030"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:text="Check Out"
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/background_btn_checkout"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
