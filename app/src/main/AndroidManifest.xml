@@ -29,7 +29,8 @@
         <activity android:name=".User.DaftarActivity" />
         <activity android:name=".User.LoginActivity" />
         <activity android:name=".User.GantiPasswordActivity" />
-        <activity android:name=".DeskripsiProdukActivity"></activity>
+        <activity android:name=".DeskripsiProdukActivity" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>
