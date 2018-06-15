@@ -1,5 +1,6 @@
 package com.example.bahroel.adidasshoeshop.Api;
 
+import com.example.bahroel.adidasshoeshop.Response.PaymentResponse;
 import com.example.bahroel.adidasshoeshop.Response.ProdukDetailResponse;
 import com.example.bahroel.adidasshoeshop.Response.ProdukResponse;
 import com.example.bahroel.adidasshoeshop.Response.UserResponse;
@@ -35,5 +36,8 @@ public interface ApiInterface {
     Call<ProdukResponse> getSearchJSON(@Query("searchkey") String searchkey, @Query("page") int page);
     @GET("api/getDetailProduk")
     Call<ProdukDetailResponse> getDetailProdukJSON(@Query("id_produk") int id);
+    @POST("api/payment")
+    @FormUrlEncoded
+    Call<PaymentResponse> payment(@Field("id_produk") int id, @Field("jumlah") int jumlah, @Field("api_token") String api_token);
 
 }
