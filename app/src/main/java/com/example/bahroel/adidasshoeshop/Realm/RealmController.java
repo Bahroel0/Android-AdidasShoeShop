@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
 
+import com.example.bahroel.adidasshoeshop.Model.ProdukCart;
 import com.example.bahroel.adidasshoeshop.Model.User;
 import com.example.bahroel.adidasshoeshop.Model.UserLogged;
 
@@ -68,5 +69,14 @@ public class RealmController {
         return realm.where(UserLogged.class).findAll();
     }
 
+    // produk
+    public RealmResults<ProdukCart> getAllProdukCart(){
+        return realm.where(ProdukCart.class).findAll();
+    }
 
+    public void clearCart() {
+        realm.beginTransaction();
+        realm.clear(ProdukCart.class);
+        realm.commitTransaction();
+    }
 }
