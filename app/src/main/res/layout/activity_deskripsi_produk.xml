@@ -48,135 +48,149 @@
 
     <ScrollView
         android:id="@+id/scrollDescripton"
-        android:visibility="gone"
-        android:layout_below="@+id/toolbar_top"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_height="wrap_content">
+                android:padding="16dp">
+
                 <LinearLayout
-                    android:layout_marginVertical="5dp"
                     android:id="@+id/nama"
-                    android:layout_below="@+id/toolbar_top"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toolbar_top"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/tv_detail_kategori"
-                        android:text="Wanita"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Wanita" />
+
                     <TextView
                         android:id="@+id/tv_detail_nama"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Campus Shoe"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <LinearLayout
-                            android:layout_weight="3"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3">
+
                             <RatingBar
                                 android:id="@+id/ratingbar"
                                 style="@style/Widget.AppCompat.RatingBar.Small"
-                                android:theme="@style/RatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:numStars="5"
                                 android:rating="3.5"
                                 android:stepSize="0.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:theme="@style/RatingBar" />
                         </LinearLayout>
+
                         <TextView
                             android:id="@+id/tv_detail_harga"
                             android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:textStyle="bold"
                             android:paddingLeft="20dp"
                             android:text="Rp. 1.000.000"
-                            android:layout_height="wrap_content" />
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginVertical="5dp"
-                    android:layout_below="@+id/nama"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nama"
+                    android:layout_marginVertical="5dp">
+
                     <ImageView
                         android:id="@+id/iv_detail_produk"
-                        android:scaleType="fitXY"
                         android:layout_width="wrap_content"
-                        android:src="@drawable/sepatu_superstar_bw_slip_on"
-                        android:layout_height="350dp" />
+                        android:layout_height="350dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sepatu_superstar_bw_slip_on" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginVertical="5dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="4"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4">
+
                         <TextView
                             android:id="@+id/tv_detail_warna"
-                            android:textColor="#050505"
-                            android:textSize="18sp"
-                            android:text="Warna : Merah"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="Warna : Merah"
+                            android:textColor="#050505"
+                            android:textSize="18sp" />
                     </LinearLayout>
+
                     <ImageView
                         android:id="@+id/iv_detail_warna"
                         android:layout_width="50dp"
+                        android:layout_height="30dp"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_warna_merah"
-                        android:layout_height="30dp" />
+                        android:src="@drawable/ic_warna_merah" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tv_size_detail"
-                        android:layout_weight="2"
-                        android:text="Size 41"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textAlignment="center"
-                        android:gravity="center"
-                        android:layout_marginRight="5dp"
-                        android:textColor="@color/colorPrimary"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Size 41"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
-                        android:layout_weight="2"
-                        android:layout_marginLeft="5dp"
                         android:layout_width="0dp"
-                        android:layout_height="65dp">
+                        android:layout_height="65dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2">
 
                         <nl.dionsegijn.steppertouch.StepperTouch
                             android:id="@+id/stepper"
-                            android:layout_marginVertical="10dp"
-                            android:layout_marginLeft="40dp"
                             android:layout_width="100dp"
                             android:layout_height="30dp"
-                            >
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginVertical="10dp">
 
                         </nl.dionsegijn.steppertouch.StepperTouch>
 
@@ -187,52 +201,58 @@
                     android:id="@+id/stockHabis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="50dp"
                         android:text="Stok Habis"
                         android:textAlignment="textEnd"
-                        android:layout_marginRight="50dp"
-                        android:textStyle="bold"
                         android:textColor="#ed1b1b"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp">
+                    android:layout_height="65dp"
+                    android:orientation="horizontal">
+
                     <Button
-                        android:layout_weight="2"
-                        android:text="Beli Sekarang"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_marginRight="5dp"
-                        android:textColor="@color/colorPrimary"
-                        android:background="@drawable/bordersignup"
-                        android:textAllCaps="false"
-                        android:layout_width="0dp"
                         android:layout_marginVertical="6dp"
-                        android:layout_height="match_parent" />
-                    <LinearLayout
                         android:layout_weight="2"
-                        android:background="@drawable/background_button"
-                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bordersignup"
+                        android:text="Beli Sekarang"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary" />
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="65dp">
+                        android:layout_height="65dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/background_button">
+
                         <LinearLayout
                             android:id="@+id/btn_add_to_cart"
-                            android:gravity="center"
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
                             <TextView
-                                android:text="+"
-                                android:textSize="18sp"
-                                android:textColor="#ffffff"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:text="+"
+                                android:textColor="#ffffff"
+                                android:textSize="18sp" />
+
                             <ImageView
-                                android:src="@drawable/add_cart_image"
                                 android:layout_width="30dp"
-                                android:layout_height="20dp" />
+                                android:layout_height="20dp"
+                                android:src="@drawable/add_cart_image" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -240,30 +260,33 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="20dp"
-                android:paddingVertical="5dp"
-                android:gravity="center"
-                android:background="@drawable/border_rectangle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border_rectangle"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
                 <TextView
                     android:id="@+id/tv_detail_nama_down"
-                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CAMPUS SHOES"
                     android:textColor="#0b0b0b"
                     android:textSize="25sp"
-                    android:text="CAMPUS SHOES"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
                 <TextView
                     android:id="@+id/tv_des_detail"
-                    android:text="A Drawable that changes the size of another Drawable based on its current level value. You can control how much the child Drawable changes in width and height based on the level, as well as a gravity to control where it is placed in its overall container. Most often used to implement things like progress bars"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="A Drawable that changes the size of another Drawable based on its current level value. You can control how much the child Drawable changes in width and height based on the level, as well as a gravity to control where it is placed in its overall container. Most often used to implement things like progress bars" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -271,13 +294,13 @@
     <RelativeLayout
         android:id="@+id/bg_avi"
         android:background="#FFFFFF"
+        android:visibility="gone"
         android:layout_below="@+id/toolbar_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.wang.avi.AVLoadingIndicatorView
             android:layout_centerInParent="true"
             android:layout_marginTop="100dp"
-
             android:id="@+id/avi_progress_dialog"
             app:indicatorColor="@color/colorPrimary"
             app:indicatorName="BallClipRotatePulseIndicator"

@@ -26,6 +26,10 @@ public class Produk implements Serializable{
     @SerializedName("deskripsi")
     private String deskripsi;
 
+    public Produk(){
+
+    }
+
     public Produk(int id,String nama, int harga, int stok, int ukuran, String warna, String kategori, String image_path, Float rating, String deskripsi) {
         this.id= id;
         this.nama = nama;
@@ -75,6 +79,10 @@ public class Produk implements Serializable{
 
     public String getWarna() {
         return warna;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setWarna(String warna) {

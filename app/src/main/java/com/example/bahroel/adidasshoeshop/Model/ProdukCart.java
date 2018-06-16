@@ -5,18 +5,20 @@ import io.realm.annotations.PrimaryKey;
 
 public class ProdukCart extends RealmObject {
     @PrimaryKey
-    private int id;
+    private long id;
     private String nama;
     private String kategori;
     private int ukuran;
     private int jumlah;
     private int harga;
+    private int id_produk;
 
-    public int getId() {
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -58,5 +60,13 @@ public class ProdukCart extends RealmObject {
 
     public void setHarga(int harga) {
         this.harga = harga;
+    }
+
+    public int getId_produk() {
+        return id_produk;
+    }
+
+    public void setId_produk(int id_produk) {
+        this.id_produk = id_produk;
     }
 }

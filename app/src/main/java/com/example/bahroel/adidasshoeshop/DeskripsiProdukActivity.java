@@ -13,10 +13,14 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bahroel.adidasshoeshop.Api.ApiInterface;
 import com.example.bahroel.adidasshoeshop.Api.ApiRequest;
+import com.example.bahroel.adidasshoeshop.Model.Produk;
+import com.example.bahroel.adidasshoeshop.Model.ProdukCart;
+import com.example.bahroel.adidasshoeshop.Realm.RealmController;
 import com.example.bahroel.adidasshoeshop.Response.ProdukDetailResponse;
 import com.example.bahroel.adidasshoeshop.Response.ProdukResponse;
 import com.example.bahroel.adidasshoeshop.Response.UserResponse;
@@ -25,6 +29,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import io.realm.Realm;
 import nl.dionsegijn.steppertouch.StepperTouch;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,9 +42,13 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
     TextView kategori, upName, downName , price, color, size, description;
     RatingBar rating;
     ScrollView scrollView;
-    int id_produk;
+    int id_produk, jumlah;
     LinearLayout stockHabis;
     AVLoadingIndicatorView avi;
+    LinearLayout btnAddCart;
+    private Realm realm;
+    Produk produk = new Produk();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
 
         bg_avi = findViewById(R.id.bg_avi);
         bg_avi.setVisibility(View.VISIBLE);
+        btnAddCart = findViewById(R.id.btn_add_to_cart);
         img_warna = findViewById(R.id.iv_detail_warna);
         stockHabis = findViewById(R.id.stockHabis);
         scrollView = findViewById(R.id.scrollDescripton);
@@ -65,6 +75,8 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
         stepperTouch.stepper.setMin(0);
 
 
+
+
         back = findViewById(R.id.imgMenu);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +88,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
             }
         });
 
-
+        this.realm = RealmController.with(this).getRealm();
 
         Bundle bundle = getIntent().getExtras();
         id_produk = bundle.getInt("id_produk");
@@ -95,6 +107,17 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProdukDetailResponse> call, Response<ProdukDetailResponse> response) {
                 ProdukDetailResponse jsonresponse = response.body();
+
+                produk.setId(jsonresponse.getProduks().getId());
+                produk.setDeskripsi(jsonresponse.getProduks().getDeskripsi());
+                produk.setHarga(jsonresponse.getProduks().getHarga());
+                produk.setImage_path(jsonresponse.getProduks().getImage_path());
+                produk.setKategori(jsonresponse.getProduks().getKategori());
+                produk.setNama(jsonresponse.getProduks().getNama());
+                produk.setRating(jsonresponse.getProduks().getRating());
+                produk.setStok(jsonresponse.getProduks().getStok());
+                produk.setUkuran(jsonresponse.getProduks().getUkuran());
+                produk.setWarna(jsonresponse.getProduks().getWarna());
 
                 Glide.with(DeskripsiProdukActivity.this)
                         .load(Constant.BASE_URL + jsonresponse.getProduks().getImage_path())
@@ -133,5 +156,30 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
             }
         });
         scrollView.setVisibility(View.VISIBLE);
+
+        btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(stepperTouch.stepper.getValue() > 0){
+                    ProdukCart produkCart = new ProdukCart();
+                    produkCart.setId(RealmController.getInstance().getAllProdukCart().size() + System.currentTimeMillis());
+                    produkCart.setHarga(produk.getHarga());
+                    produkCart.setId_produk(produk.getId());
+                    produkCart.setKategori(produk.getKategori());
+                    produkCart.setNama(produk.getNama());
+                    produkCart.setUkuran(produk.getUkuran());
+                    produkCart.setJumlah(stepperTouch.stepper.getValue());
+
+                    realm.beginTransaction();
+                    realm.copyToRealm(produkCart);
+                    realm.commitTransaction();
+
+                }else{
+                    Toast.makeText(DeskripsiProdukActivity.this, "Jumlah produk tidak boleh 0", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 }
