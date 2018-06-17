@@ -25,6 +25,7 @@ import com.example.bahroel.adidasshoeshop.App.Prefs;
 import com.example.bahroel.adidasshoeshop.Behavior.BottomNavigationBehavior;
 import com.example.bahroel.adidasshoeshop.Fragment.HomeFragment;
 import com.example.bahroel.adidasshoeshop.Fragment.KatalogFragment;
+import com.example.bahroel.adidasshoeshop.Model.ProdukCart;
 import com.example.bahroel.adidasshoeshop.Model.UserLogged;
 import com.example.bahroel.adidasshoeshop.Realm.RealmController;
 import com.example.bahroel.adidasshoeshop.User.DaftarActivity;
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             RealmController.with(MainActivity.this).refresh();
         }catch (NullPointerException e){
             tv_username.setText("");
+        }catch (ArrayIndexOutOfBoundsException f){
+
         }
 
         this.realm = RealmController.with(this).getRealm();
@@ -212,17 +215,23 @@ public class MainActivity extends AppCompatActivity {
             FT.commit();
         }
 
-
-
-
     }
 
     private void setRealmData() {
         UserLogged user = new UserLogged(0,null,null,null);
+        ProdukCart produk = new ProdukCart(0,"","",0,0,0,0);
+
+        realm.commitTransaction();
         realm.beginTransaction();
         realm.copyToRealm(user);
         realm.commitTransaction();
+
+        realm.beginTransaction();
+        realm.copyToRealm(produk);
+        realm.commitTransaction();
+
         Prefs.with(this).setPreLoad(true);
+
     }
 
 

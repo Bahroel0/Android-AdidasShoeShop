@@ -49,7 +49,6 @@ public class RealmController {
     }
 
     public Realm getRealm() {
-
         return realm;
     }
 
@@ -68,6 +67,9 @@ public class RealmController {
     public RealmResults<UserLogged> getUserLogged(){
         return realm.where(UserLogged.class).findAll();
     }
+
+
+
 
     // produk
     public RealmResults<ProdukCart> getAllProdukCart(){
