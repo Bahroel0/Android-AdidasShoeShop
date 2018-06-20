@@ -38,7 +38,7 @@ import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
     private Realm realm;
-    ImageView imgToogle;
+    ImageView imgToogle, imgCart;
     TextView tv_username;
     LinearLayout lnr_user, daftar, masuk, lnr_user_logged, btn_ubah_password, btn_riwayat, btn_keluar;
     EditText edtSearch;
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         lnr_user_logged.setVisibility(View.GONE);
         edtSearch = findViewById(R.id.edtSearch);
         search = findViewById(R.id.search_close_btnsearch);
+        imgCart = findViewById(R.id.imgCart);
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(realmConfiguration);
@@ -143,6 +144,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRealmData() {
         UserLogged user = new UserLogged(0,null,null,null);
-        ProdukCart produk = new ProdukCart(0,"","",0,0,0,0);
+        ProdukCart produk = new ProdukCart(0,"","",0,0,0,0,"");
 
         realm.commitTransaction();
         realm.beginTransaction();

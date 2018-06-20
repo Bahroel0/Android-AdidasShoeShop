@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rl_produk_cart"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -47,7 +48,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_kategori_produk_list_produk"
+                    android:id="@+id/tv_kategori_produk_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_nama_produk_list_produk"
@@ -60,7 +61,7 @@
                     android:id="@+id/tv_ukuran_produk_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_kategori_produk_list_produk"
+                    android:layout_below="@+id/tv_kategori_produk_list"
                     android:layout_marginTop="10dp"
                     android:text="Ukuran   : 39"
                     android:textColor="#131212" />

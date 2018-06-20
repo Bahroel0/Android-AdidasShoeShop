@@ -171,6 +171,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
                     produkCart.setKategori(produk.getKategori());
                     produkCart.setNama(produk.getNama());
                     produkCart.setUkuran(produk.getUkuran());
+                    produkCart.setImg_produk(produk.getImage_path());
                     produkCart.setJumlah(stepperTouch.stepper.getValue());
 
                     SweetAlertDialog dialog = new SweetAlertDialog(DeskripsiProdukActivity.this, SweetAlertDialog.WARNING_TYPE)

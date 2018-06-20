@@ -12,11 +12,12 @@ public class ProdukCart extends RealmObject {
     private int jumlah;
     private int harga;
     private int id_produk;
+    private String img_produk;
 
     public ProdukCart() {
     }
 
-    public ProdukCart(long id, String nama, String kategori, int ukuran, int jumlah, int harga, int id_produk) {
+    public ProdukCart(long id, String nama, String kategori, int ukuran, int jumlah, int harga, int id_produk, String img_produk) {
         this.id = id;
         this.nama = nama;
         this.kategori = kategori;
@@ -24,6 +25,7 @@ public class ProdukCart extends RealmObject {
         this.jumlah = jumlah;
         this.harga = harga;
         this.id_produk = id_produk;
+        this.img_produk = img_produk;
     }
 
     public long getId() {
@@ -80,5 +82,13 @@ public class ProdukCart extends RealmObject {
 
     public void setId_produk(int id_produk) {
         this.id_produk = id_produk;
+    }
+
+    public String getImg_produk() {
+        return img_produk;
+    }
+
+    public void setImg_produk(String img_produk) {
+        this.img_produk = img_produk;
     }
 }

@@ -9,14 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.bahroel.adidasshoeshop.App.Prefs;
+import com.example.bahroel.adidasshoeshop.Constant;
 import com.example.bahroel.adidasshoeshop.Model.ProdukCart;
 import com.example.bahroel.adidasshoeshop.R;
 import com.example.bahroel.adidasshoeshop.Realm.RealmController;
 import com.example.bahroel.adidasshoeshop.Realm.RealmRecyclerViewAdapter;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import io.realm.Realm;
 
@@ -41,6 +47,24 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
 
         realm = RealmController.getInstance().getRealm();
 
+        final ProdukCart produk = getItem(position);
+        final ProdukCartAdapter.CardViewHolder holder = (ProdukCartAdapter.CardViewHolder) viewHolder;
+
+        if(produk.getJumlah()==0){
+            holder.rl_produk_cart.setVisibility(View.GONE);
+        }
+
+        Glide.with(context)
+                .load(Constant.BASE_URL + produk.getImg_produk())
+                .override(500,500)
+                .into(holder.img_produk);
+        holder.nama.setText(produk.getNama());
+        holder.kategori.setText(produk.getKategori());
+        holder.jumlah.setText("Jumlah  : "+produk.getJumlah());
+        String str = NumberFormat.getNumberInstance(Locale.US).format(produk.getHarga());
+        holder.harga.setText("Rp. "+str);
+        holder.ukuran.setText("Ukuran   : "+ produk.getUkuran());
+
 
     }
 
@@ -57,6 +81,7 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
         public CardView card;
         public TextView nama, kategori, jumlah, ukuran, harga;
         public ImageView img_produk;
+        RelativeLayout rl_produk_cart;
 
         public CardViewHolder(View itemView) {
             // standard view holder pattern with Butterknife view injection
@@ -64,10 +89,12 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
 
             card = (CardView) itemView.findViewById(R.id.card_view);
             nama = (TextView) itemView.findViewById(R.id.tv_nama_produk_list_produk);
-            kategori = (TextView) itemView.findViewById(R.id.tv_kategori_produk_list_produk);
-            nama = (TextView) itemView.findViewById(R.id.tv_nama_produk_list_produk);
-            kategori = (TextView) itemView.findViewById(R.id.tv_kategori_produk_list_produk);
+            kategori = (TextView) itemView.findViewById(R.id.tv_kategori_produk_list);
+            jumlah = (TextView) itemView.findViewById(R.id.tv_jumlah_produk_list);
+            ukuran = (TextView) itemView.findViewById(R.id.tv_ukuran_produk_list);
+            harga = (TextView) itemView.findViewById(R.id.tv_harga_produk_list);
             img_produk = itemView.findViewById(R.id.img_produk_cart);
+            rl_produk_cart = itemView.findViewById(R.id.rl_produk_cart);
         }
     }
 }
