@@ -48,7 +48,8 @@
 
     <ScrollView
         android:id="@+id/scrollDescripton"
-
+        android:layout_below="@+id/toolbar_top"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -114,6 +115,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:paddingLeft="20dp"
+                            android:textSize="18sp"
                             android:text="Rp. 1.000.000"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -294,7 +296,6 @@
     <RelativeLayout
         android:id="@+id/bg_avi"
         android:background="#FFFFFF"
-        android:visibility="gone"
         android:layout_below="@+id/toolbar_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

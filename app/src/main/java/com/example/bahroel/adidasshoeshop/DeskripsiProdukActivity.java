@@ -1,6 +1,7 @@
 package com.example.bahroel.adidasshoeshop;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Rating;
 import android.opengl.Visibility;
 import android.os.Handler;
@@ -29,6 +30,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.realm.Realm;
 import nl.dionsegijn.steppertouch.StepperTouch;
 import retrofit2.Call;
@@ -162,7 +164,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(stepperTouch.stepper.getValue() > 0){
-                    ProdukCart produkCart = new ProdukCart();
+                    final ProdukCart produkCart = new ProdukCart();
                     produkCart.setId(RealmController.getInstance().getAllProdukCart().size() + System.currentTimeMillis());
                     produkCart.setHarga(produk.getHarga());
                     produkCart.setId_produk(produk.getId());
@@ -171,10 +173,27 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
                     produkCart.setUkuran(produk.getUkuran());
                     produkCart.setJumlah(stepperTouch.stepper.getValue());
 
-                    realm.beginTransaction();
-                    realm.copyToRealm(produkCart);
-                    realm.commitTransaction();
+                    SweetAlertDialog dialog = new SweetAlertDialog(DeskripsiProdukActivity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Ingin menambahkan ke keranjang ?")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog
+                                            .setTitleText("Sukses!")
+                                            .setContentText("Barang telah ditambahkan ke keranjang")
+                                            .setCancelText(null)
+                                            .setConfirmText("OK")
+                                            .setConfirmClickListener(null)
+                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
 
+                                    realm.beginTransaction();
+                                    realm.copyToRealm(produkCart);
+                                    realm.commitTransaction();
+                                }
+                            });
+                    dialog.getProgressHelper().setBarColor(Color.parseColor("#0089D0"));
+                    dialog.show();
                 }else{
                     Toast.makeText(DeskripsiProdukActivity.this, "Jumlah produk tidak boleh 0", Toast.LENGTH_SHORT).show();
                 }
