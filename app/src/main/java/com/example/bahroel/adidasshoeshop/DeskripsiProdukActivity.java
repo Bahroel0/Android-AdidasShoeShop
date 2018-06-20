@@ -166,7 +166,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
                 if(stepperTouch.stepper.getValue() > 0){
                     final ProdukCart produkCart = new ProdukCart();
                     produkCart.setId(RealmController.getInstance().getAllProdukCart().size() + System.currentTimeMillis());
-                    produkCart.setHarga(produk.getHarga());
+                    produkCart.setHarga(produk.getHarga() * stepperTouch.stepper.getValue());
                     produkCart.setId_produk(produk.getId());
                     produkCart.setKategori(produk.getKategori());
                     produkCart.setNama(produk.getNama());

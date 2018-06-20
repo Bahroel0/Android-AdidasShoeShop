@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -64,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
         search = findViewById(R.id.search_close_btnsearch);
         imgCart = findViewById(R.id.imgCart);
 
+
+        edtSearch.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                view.setFocusable(true);
+                view.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(realmConfiguration);
 

@@ -48,7 +48,7 @@
         android:id="@+id/rv_cart"
         android:layout_below="@+id/toolbar_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="350dp">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -73,6 +73,7 @@
                     android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/total_bayar_cart"
                     android:text="Rp. 1000.000"
                     android:textSize="18sp"
                     android:textColor="#333030"

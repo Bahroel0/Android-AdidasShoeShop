@@ -64,7 +64,9 @@ dependencies {
     // progress dialog
     implementation 'com.wang.avi:library:2.1.3'
 
-   // implementation 'cn.pedant.sweetalert:library:1.3'
-//    implementation 'com.github.Leogiroux:sweet-alert-dialog'
+    // sweet dialog
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+
+    // broken view
+    implementation 'com.zys:brokenview:1.0.3'
 }
