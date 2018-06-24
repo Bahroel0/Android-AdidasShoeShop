@@ -1,13 +1,18 @@
 package com.example.bahroel.adidasshoeshop;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Rating;
 import android.opengl.Visibility;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -21,10 +26,13 @@ import com.example.bahroel.adidasshoeshop.Api.ApiInterface;
 import com.example.bahroel.adidasshoeshop.Api.ApiRequest;
 import com.example.bahroel.adidasshoeshop.Model.Produk;
 import com.example.bahroel.adidasshoeshop.Model.ProdukCart;
+import com.example.bahroel.adidasshoeshop.Model.UserLogged;
 import com.example.bahroel.adidasshoeshop.Realm.RealmController;
+import com.example.bahroel.adidasshoeshop.Response.PaymentResponse;
 import com.example.bahroel.adidasshoeshop.Response.ProdukDetailResponse;
 import com.example.bahroel.adidasshoeshop.Response.ProdukResponse;
 import com.example.bahroel.adidasshoeshop.Response.UserResponse;
+import com.example.bahroel.adidasshoeshop.User.LoginActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.text.NumberFormat;
@@ -32,6 +40,7 @@ import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import nl.dionsegijn.steppertouch.StepperTouch;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +53,9 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
     TextView kategori, upName, downName , price, color, size, description;
     RatingBar rating;
     ScrollView scrollView;
-    int id_produk, jumlah;
+    public int id_produk;
+    public static int hargaProduk;
+    Button beliSekarang;
     LinearLayout stockHabis;
     AVLoadingIndicatorView avi;
     LinearLayout btnAddCart;
@@ -55,6 +66,13 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deskripsi_produk);
+
+        RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
+        realm.beginTransaction();
+        final String remember_roken = result.get(0).getRemember_token();
+        final int id_user = result.get(0).getId();
+        final String api_token = result.get(0).getApi_token();
+        realm.commitTransaction();
 
         bg_avi = findViewById(R.id.bg_avi);
         bg_avi.setVisibility(View.VISIBLE);
@@ -75,6 +93,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
         avi = findViewById(R.id.avi_progress_dialog);
         stepperTouch = findViewById(R.id.stepper);
         stepperTouch.stepper.setMin(0);
+        beliSekarang = findViewById(R.id.btn_beli_sekarang);
 
 
 
@@ -109,6 +128,8 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProdukDetailResponse> call, Response<ProdukDetailResponse> response) {
                 ProdukDetailResponse jsonresponse = response.body();
+
+                DeskripsiProdukActivity.hargaProduk = jsonresponse.getProduks().getHarga();
 
                 produk.setId(jsonresponse.getProduks().getId());
                 produk.setDeskripsi(jsonresponse.getProduks().getDeskripsi());
@@ -199,6 +220,88 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
                     Toast.makeText(DeskripsiProdukActivity.this, "Jumlah produk tidak boleh 0", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        beliSekarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(remember_roken==null){
+                    Toast.makeText(DeskripsiProdukActivity.this, "Anda harus login dulu", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DeskripsiProdukActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }else
+                if(stepperTouch.stepper.getValue() == 0){
+                    Toast.makeText(DeskripsiProdukActivity.this, "Jumlah produk tidak boleh 0", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    final Dialog dialog = new Dialog(DeskripsiProdukActivity.this);
+                    dialog.getWindow();
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_pembayaran);
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
+
+                    Button oke = dialog.findViewById(R.id.btn_bayar_oke);
+                    Button batal = dialog.findViewById(R.id.btn_bayar_batal);
+                    batal.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    oke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                            final ProgressDialog progressDialog = new ProgressDialog(DeskripsiProdukActivity.this);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("Proses Pembelian . . .");
+                            progressDialog.show();
+
+
+                            final ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
+                            Call<PaymentResponse> call = request.addRiwayat(id_user, stepperTouch.stepper.getValue()*DeskripsiProdukActivity.hargaProduk,api_token);
+                            call.enqueue(new Callback<PaymentResponse>() {
+                                @Override
+                                public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
+                                    if(response.body().isSuccess()){
+                                        Call<PaymentResponse> call1 = request.payment(id_produk,stepperTouch.stepper.getValue(),api_token);
+                                        call1.enqueue(new Callback<PaymentResponse>() {
+                                            @Override
+                                            public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
+
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<PaymentResponse> call, Throwable t) {
+
+                                            }
+                                        });
+                                    }
+                                    Handler handler = null;
+                                    handler = new Handler();
+                                    handler.postDelayed(new Runnable(){
+                                        public void run(){
+                                            progressDialog.dismiss();
+                                        }
+                                    }, 2500);
+                                    realm.commitTransaction();
+                                }
+
+                                @Override
+                                public void onFailure(Call<PaymentResponse> call, Throwable t) {
+
+                                }
+                            });
+
+                        }
+                    });
+                }
             }
         });
     }
