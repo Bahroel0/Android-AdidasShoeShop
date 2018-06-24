@@ -48,9 +48,9 @@ public class HomeFragment extends Fragment{
         rilis = (RecyclerView) viewFrag1.findViewById(R.id.rv_baru_rilis);
         laris = (RecyclerView) viewFrag1.findViewById(R.id.rv_produk_terlaris);
         tvLihatSemua = (TextView)viewFrag1.findViewById(R.id.txt1);
-        wanita = viewFrag1.findViewById(R.id.wanita);
-        pria = viewFrag1.findViewById(R.id.pria);
-        anak = viewFrag1.findViewById(R.id.anak);
+        wanita = (TextView)viewFrag1.findViewById(R.id.wanita);
+        pria = (TextView)viewFrag1.findViewById(R.id.pria);
+        anak = (TextView)viewFrag1.findViewById(R.id.anak);
 
         wanita.setOnClickListener(new View.OnClickListener() {
             @Override

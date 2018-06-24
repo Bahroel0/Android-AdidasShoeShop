@@ -130,7 +130,7 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
             jumlah = (TextView) itemView.findViewById(R.id.tv_jumlah_produk_list);
             ukuran = (TextView) itemView.findViewById(R.id.tv_ukuran_produk_list);
             harga = (TextView) itemView.findViewById(R.id.tv_harga_produk_list);
-            img_produk = itemView.findViewById(R.id.img_produk_cart);
+            img_produk = (ImageView) itemView.findViewById(R.id.img_produk_cart);
         }
     }
 }

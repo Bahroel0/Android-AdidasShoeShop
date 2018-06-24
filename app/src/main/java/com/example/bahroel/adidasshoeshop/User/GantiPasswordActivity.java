@@ -77,6 +77,7 @@ public class GantiPasswordActivity extends AppCompatActivity {
                             Toast.makeText(GantiPasswordActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(GantiPasswordActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("from",1);
                             startActivity(intent);
                         }else{
                             Toast.makeText(GantiPasswordActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();

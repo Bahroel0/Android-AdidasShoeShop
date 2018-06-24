@@ -131,7 +131,7 @@ public class CartActivity extends AppCompatActivity {
                         dialog.dismiss();
                         final ProgressDialog progressDialog = new ProgressDialog(CartActivity.this);
                         progressDialog.setCancelable(false);
-                        progressDialog.setMessage("Proses Pembelian. . .");
+                        progressDialog.setMessage("Proses Pembelian . . .");
                         progressDialog.show();
 
                         realm = RealmController.with(CartActivity.this).getRealm();

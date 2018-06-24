@@ -82,12 +82,12 @@ public class KatalogAdapter extends RecyclerView.Adapter<KatalogAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
 
-            foto = itemView.findViewById(R.id.iv_foto_produk);
-            warna = itemView.findViewById(R.id.iv_warna_produk);
-            nama = itemView.findViewById(R.id.tv_nama_produk);
-            kategori =itemView.findViewById(R.id.tv_kategori_produk);
-            harga = itemView.findViewById(R.id.tv_harga_produk);
-            cardView = itemView.findViewById(R.id.cv_produk_katalog);
+            foto = (ImageView)itemView.findViewById(R.id.iv_foto_produk);
+            warna = (ImageView)itemView.findViewById(R.id.iv_warna_produk);
+            nama = (TextView)itemView.findViewById(R.id.tv_nama_produk);
+            kategori =(TextView)itemView.findViewById(R.id.tv_kategori_produk);
+            harga = (TextView)itemView.findViewById(R.id.tv_harga_produk);
+            cardView = (CardView) itemView.findViewById(R.id.cv_produk_katalog);
         }
     }
 }

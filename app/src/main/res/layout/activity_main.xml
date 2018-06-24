@@ -19,6 +19,7 @@
             android:minHeight="?attr/actionBarSize"
             android:background="@color/colorPrimary">
             <LinearLayout
+                android:layout_marginLeft="-15dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">

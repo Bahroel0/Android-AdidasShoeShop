@@ -1,5 +1,6 @@
 package com.example.bahroel.adidasshoeshop.User;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.bahroel.adidasshoeshop.Api.ApiInterface;
 import com.example.bahroel.adidasshoeshop.Api.ApiRequest;
+import com.example.bahroel.adidasshoeshop.CartActivity;
 import com.example.bahroel.adidasshoeshop.MainActivity;
 import com.example.bahroel.adidasshoeshop.Model.User;
 import com.example.bahroel.adidasshoeshop.Model.UserLogged;
@@ -85,6 +87,10 @@ public class DaftarActivity extends AppCompatActivity {
                 }
 
                 if (password.equals(konfpass)){
+                    final ProgressDialog progressDialog = new ProgressDialog(DaftarActivity.this);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setMessage("Proses . . .");
+                    progressDialog.show();
                     // request to server
                     final ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
                     Call<UserResponse> call = request.register(username,email,password);
@@ -95,6 +101,7 @@ public class DaftarActivity extends AppCompatActivity {
                                 UserResponse jsonresponse = response.body();
                                 // store cache to realm
                                 if(jsonresponse.isSuccess()){
+                                    progressDialog.dismiss();
                                     realm = RealmController.with(DaftarActivity.this).getRealm();
                                     RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
                                     realm.beginTransaction();
@@ -110,6 +117,7 @@ public class DaftarActivity extends AppCompatActivity {
                                     Toast.makeText(DaftarActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(DaftarActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.putExtra("from",1);
                                     startActivity(intent);
                                 }else{
                                     Toast.makeText(DaftarActivity.this,""+jsonresponse.getMessage(),Toast.LENGTH_LONG).show();
