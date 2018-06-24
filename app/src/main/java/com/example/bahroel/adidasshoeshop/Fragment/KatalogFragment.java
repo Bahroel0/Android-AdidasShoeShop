@@ -104,7 +104,7 @@ public class KatalogFragment extends Fragment {
 
                 }
             });
-        }else if(kategori.equals("Wanita")){
+        }else if(kategori.equals("wanita")){
             ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
             Call<ProdukResponse> call = request.getKategoriProdukJSON("Wanita",1);
             call.enqueue(new Callback<ProdukResponse>() {
@@ -130,7 +130,7 @@ public class KatalogFragment extends Fragment {
 
                 }
             });
-        }else if(kategori.equals("Pria")){
+        }else if(kategori.equals("pria")){
             ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
             Call<ProdukResponse> call = request.getKategoriProdukJSON("Pria",1);
             call.enqueue(new Callback<ProdukResponse>() {
@@ -156,9 +156,9 @@ public class KatalogFragment extends Fragment {
 
                 }
             });
-        }else if(kategori.equals("Anak")){
+        }else if(kategori.equals("anak")){
             ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-            Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak",1);
+            Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak-Anak",1);
             call.enqueue(new Callback<ProdukResponse>() {
                 @Override
                 public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
@@ -290,7 +290,7 @@ public class KatalogFragment extends Fragment {
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
                             ProdukResponse jsonresponse = response.body();
                             int the_last = jsonresponse.getCurrentPage();
-                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                            if(jsonresponse.getProduks() == null || the_last > last_page){
                                 Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
                             }else{
                                 produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
@@ -307,7 +307,7 @@ public class KatalogFragment extends Fragment {
 
                         }
                     });
-                }else if(kategori.equals("Wanita")){
+                }else if(kategori.equals("wanita")){
                     ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
                     Call<ProdukResponse> call = request.getKategoriProdukJSON("Wanita", page);
                     call.enqueue(new Callback<ProdukResponse>() {
@@ -315,7 +315,7 @@ public class KatalogFragment extends Fragment {
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
                             ProdukResponse jsonresponse = response.body();
                             int the_last = jsonresponse.getCurrentPage();
-                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                            if(jsonresponse.getProduks() == null || the_last > last_page){
                                 Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
                             }else{
                                 produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
@@ -340,7 +340,7 @@ public class KatalogFragment extends Fragment {
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
                             ProdukResponse jsonresponse = response.body();
                             int the_last = jsonresponse.getCurrentPage();
-                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                            if(jsonresponse.getProduks() == null || the_last > last_page){
                                 Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
                             }else{
                                 produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
@@ -359,13 +359,13 @@ public class KatalogFragment extends Fragment {
                     });
                 }else if(kategori.equals("anak")){
                     ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak", page);
+                    Call<ProdukResponse> call = request.getKategoriProdukJSON("Anak-Anak", page);
                     call.enqueue(new Callback<ProdukResponse>() {
                         @Override
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
                             ProdukResponse jsonresponse = response.body();
                             int the_last = jsonresponse.getCurrentPage();
-                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                            if(jsonresponse.getProduks() == null || the_last > last_page){
                                 Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
                             }else{
                                 produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
@@ -390,7 +390,7 @@ public class KatalogFragment extends Fragment {
                         public void onResponse(Call<ProdukResponse> call, Response<ProdukResponse> response) {
                             ProdukResponse jsonresponse = response.body();
                             int the_last = jsonresponse.getCurrentPage();
-                            if(jsonresponse.getProduks() == null || the_last == last_page){
+                            if(jsonresponse.getProduks() == null || the_last > last_page){
                                 Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
                             }else{
                                 produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));

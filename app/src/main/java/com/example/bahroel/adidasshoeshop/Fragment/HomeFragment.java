@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("kategori","Wanita");
+                bundle.putString("kategori","wanita");
                 KatalogFragment katalogFragment = new KatalogFragment();
                 katalogFragment.setArguments(bundle);
 
@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("kategori","Pria");
+                bundle.putString("kategori","pria");
                 KatalogFragment katalogFragment = new KatalogFragment();
                 katalogFragment.setArguments(bundle);
 
@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("kategori","Anak");
+                bundle.putString("kategori","anak");
                 KatalogFragment katalogFragment = new KatalogFragment();
                 katalogFragment.setArguments(bundle);
 

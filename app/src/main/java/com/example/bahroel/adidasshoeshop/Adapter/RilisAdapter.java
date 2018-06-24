@@ -1,7 +1,9 @@
 package com.example.bahroel.adidasshoeshop.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bahroel.adidasshoeshop.Constant;
+import com.example.bahroel.adidasshoeshop.DeskripsiProdukActivity;
 import com.example.bahroel.adidasshoeshop.MainActivity;
 import com.example.bahroel.adidasshoeshop.Model.Produk;
 import com.example.bahroel.adidasshoeshop.R;
@@ -38,7 +41,7 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Glide.with(context)
                 .load(Constant.BASE_URL + produkList.get(position).getImage_path())
                 .override(500,500)
@@ -57,6 +60,15 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
         String str = NumberFormat.getNumberInstance(Locale.US).format(produkList.get(position).getHarga());
         holder.harga.setText("Rp. "+str);
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DeskripsiProdukActivity.class);
+                intent.putExtra("id_produk", produkList.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -69,6 +81,7 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
         ImageView foto;
         ImageView warna;
         TextView nama, kategori, harga;
+        CardView cardView;
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -77,6 +90,7 @@ public class RilisAdapter extends RecyclerView.Adapter<RilisAdapter.ViewHolder>{
             nama = (TextView)itemView.findViewById(R.id.tv_nama_produk);
             kategori =(TextView)itemView.findViewById(R.id.tv_kategori_produk);
             harga = (TextView)itemView.findViewById(R.id.tv_harga_produk);
+            cardView = itemView.findViewById(R.id.cv_produk);
         }
     }
 }
