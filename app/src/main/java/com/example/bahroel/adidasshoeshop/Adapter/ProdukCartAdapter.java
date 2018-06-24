@@ -70,7 +70,6 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
         holder.harga.setText("Rp. "+str);
         holder.ukuran.setText("Ukuran   : "+ produk.getUkuran());
 
-//        holder.card.setOnTouchListener(CartActivity.brokenTouchListener);
         holder.card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -90,6 +89,7 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
                         realm.commitTransaction();
 
                         notifyDataSetChanged();
+
                         total = 0;
                         for(int i =0; i< results.size(); i++){
                             total += results.get(i).getHarga();
@@ -99,7 +99,7 @@ public class ProdukCartAdapter extends RealmRecyclerViewAdapter<ProdukCart> {
 
                         Toast.makeText(context, name + " Berhasil dihapus dari keranjang", Toast.LENGTH_SHORT).show();
                     }
-                }, 2800);
+                }, 2600);
                 return false;
             }
         });

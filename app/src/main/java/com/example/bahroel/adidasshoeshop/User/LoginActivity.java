@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                                 RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
                                 realm.beginTransaction();
                                 result.get(0).setId(jsonresponse.getUser().getId());
+                                result.get(0).setUsername(jsonresponse.getUser().getName());
                                 result.get(0).setApi_token(jsonresponse.getUser().getApi_token());
                                 result.get(0).setRemember_token(jsonresponse.getUser().getRemember_token());
                                 realm.commitTransaction();

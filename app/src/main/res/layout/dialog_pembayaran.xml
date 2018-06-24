@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/pay1"
+        android:layout_width="350dp"
+        android:layout_height="300dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_bayar_batal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Batal"
+            android:layout_marginRight="20dp"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:background="@drawable/background_btn_checkout"/>
+        <Button
+            android:id="@+id/btn_bayar_oke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oke"
+            android:layout_marginLeft="20dp"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:background="@drawable/background_btn_checkout"/>
+    </LinearLayout>
+
+</LinearLayout>

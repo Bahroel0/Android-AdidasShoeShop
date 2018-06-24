@@ -11,16 +11,27 @@ public class User{
     private int id;
     @SerializedName("email")
     private String email;
+    @SerializedName("name")
+    private String name;
     @SerializedName("api_token")
     private String api_token;
     @SerializedName("remember_token")
     private String remember_token;
 
-    public User(int id, String email, String api_token, String remember_token) {
+    public User(int id, String email, String name, String api_token, String remember_token) {
         this.id = id;
         this.email = email;
+        this.name = name;
         this.api_token = api_token;
         this.remember_token = remember_token;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {

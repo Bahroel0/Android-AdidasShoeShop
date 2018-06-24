@@ -3,6 +3,7 @@ package com.example.bahroel.adidasshoeshop.User;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,7 @@ public class DaftarActivity extends AppCompatActivity {
         });
 
         edtUsername = findViewById(R.id.edtUsername);
+        edtUsername.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         edtKonfPassword = findViewById(R.id.edtKonfPassword);
@@ -85,7 +87,7 @@ public class DaftarActivity extends AppCompatActivity {
                 if (password.equals(konfpass)){
                     // request to server
                     final ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
-                    Call<UserResponse> call = request.register(email,password);
+                    Call<UserResponse> call = request.register(username,email,password);
                     call.enqueue(new Callback<UserResponse>() {
                         @Override
                         public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -97,7 +99,7 @@ public class DaftarActivity extends AppCompatActivity {
                                     RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
                                     realm.beginTransaction();
                                     result.get(0).setId(jsonresponse.getUser().getId());
-                                    result.get(0).setUsername(username);
+                                    result.get(0).setUsername(jsonresponse.getUser().getName());
                                     result.get(0).setApi_token(jsonresponse.getUser().getApi_token());
                                     result.get(0).setRemember_token(jsonresponse.getUser().getRemember_token());
                                     realm.commitTransaction();
