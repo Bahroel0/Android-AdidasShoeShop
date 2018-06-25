@@ -69,4 +69,7 @@ dependencies {
 
     // broken view
     implementation 'com.zys:brokenview:1.0.3'
+
+    //rangeseekbar
+    implementation 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'
 }

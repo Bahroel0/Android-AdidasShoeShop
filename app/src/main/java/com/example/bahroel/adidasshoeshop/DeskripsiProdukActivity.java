@@ -67,6 +67,7 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deskripsi_produk);
 
+        this.realm = RealmController.with(this).getRealm();
         RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
         realm.beginTransaction();
         final String remember_roken = result.get(0).getRemember_token();
@@ -108,8 +109,6 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        this.realm = RealmController.with(this).getRealm();
 
         Bundle bundle = getIntent().getExtras();
         id_produk = bundle.getInt("id_produk");
@@ -290,7 +289,6 @@ public class DeskripsiProdukActivity extends AppCompatActivity {
                                             progressDialog.dismiss();
                                         }
                                     }, 2500);
-                                    realm.commitTransaction();
                                 }
 
                                 @Override

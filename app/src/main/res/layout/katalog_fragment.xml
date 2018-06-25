@@ -33,32 +33,37 @@
 
 
     <LinearLayout
-        android:id="@+id/lnr_sorting"
         android:visibility="gone"
+        android:id="@+id/lnr_sorting"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="wrap_content"
         android:background="@drawable/background_sorting"
         android:layout_marginBottom="55dp"
         android:layout_gravity="bottom">
 
         <RadioGroup
+            android:id="@+id/rg_sorting"
                 android:layout_width="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/sorting_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:text=" Rating"/>
                 <RadioButton
+                    android:id="@+id/sorting_terendah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:text=" Harga Terendah - Tertinggi"/>
                 <RadioButton
+                    android:id="@+id/sorting_tertinggi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
@@ -66,6 +71,16 @@
                     android:text=" Harga Tertinggi - Terendah"/>
 
             </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_sorting_sekarang"
+            android:layout_marginHorizontal="100dp"
+            android:background="@drawable/background_btn_checkout"
+            android:text="Sorting Sekarang"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
@@ -111,17 +126,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/tv_harga_min_filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp. min"/>
+                        android:text="Rp. 0"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" - "/>
                     <TextView
+                        android:id="@+id/tv_harga_max_filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp. Max"/>
+                        android:text="Rp. 5.000.000"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -129,17 +146,10 @@
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" Min"/>
-                    <SeekBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text=" Max"
+                    <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+                        android:id="@+id/seekbar_harga_filter"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="-25dp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
@@ -166,15 +176,20 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="20dp"
+                        android:id="@+id/iv_minus_ukuran_filter"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="wrap_content"
                         android:src="@drawable/ic_remove_circle"
-                        android:layout_height="20dp" />
+                        android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/tv_ukuran_filter"
                         android:layout_width="wrap_content"
                         android:textStyle="bold"
-                        android:text="  40  "
+                        android:text="-"
                         android:layout_height="wrap_content" />
                     <ImageView
+                        android:id="@+id/iv_plus_ukuran_filter"
+                        android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:src="@drawable/ic_add_circle"
                         android:layout_height="wrap_content" />
@@ -207,27 +222,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <CheckBox
+                    android:id="@+id/cb_merah"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="Merah"/>
                 <CheckBox
+                    android:id="@+id/cb_abu"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="Abu-abu"/>
                 <CheckBox
+                    android:id="@+id/cb_hitam"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="Hitam"/>
                 <CheckBox
+                    android:id="@+id/cb_putih"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="Putih"/>
             </LinearLayout>
         </RelativeLayout>
+        <Button
+            android:id="@+id/btn_filter_sekarang"
+            android:layout_marginHorizontal="100dp"
+            android:background="@drawable/background_btn_checkout"
+            android:text="Filter Sekarang"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

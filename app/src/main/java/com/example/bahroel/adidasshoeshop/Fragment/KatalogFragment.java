@@ -5,9 +5,11 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -26,8 +28,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bahroel.adidasshoeshop.Adapter.KatalogAdapter;
@@ -39,9 +48,14 @@ import com.example.bahroel.adidasshoeshop.MainActivity;
 import com.example.bahroel.adidasshoeshop.Model.Produk;
 import com.example.bahroel.adidasshoeshop.R;
 import com.example.bahroel.adidasshoeshop.Response.ProdukResponse;
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
+import java.lang.reflect.Array;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,15 +65,27 @@ public class KatalogFragment extends Fragment {
     RecyclerView katalog;
     int last_page;
     int page = 2;
-    ArrayList<Produk> produkArrayList= new ArrayList<>();
+    public static ArrayList<Produk> produkArrayList= new ArrayList<>();
     LinearLayout lnr_filter, lnr_sort, lnr_no_produk;
     boolean userScrolled = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private static RelativeLayout bottomLayout;
     private KatalogAdapter adapter;
     private static LinearLayoutManager layoutManager;
-
+    Button btn_sorting_sekarang,btn_filter_sekarang;
     String kategori, searchkey;
+
+    RadioGroup rg_sorting;
+    // filter
+    TextView tv_harga_min_filter,tv_harga_max_filter,tv_ukuran_filter;
+    CheckBox cb_merah,cb_abu ,cb_hitam,cb_putih;
+    RangeSeekBar<Integer> seekbar_harga_filter;
+    ImageView iv_minus_ukuran_filter,iv_plus_ukuran_filter;
+
+    public int MIN_PRICE, MAX_PRICE, SHOE_SIZE=40;
+    public boolean sekbartouch = false;
+    public ArrayList<String> WARNA= new ArrayList<>();
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View viewFrag1 = inflater.inflate(R.layout.katalog_fragment, container, false);
@@ -77,6 +103,37 @@ public class KatalogFragment extends Fragment {
         lnr_filter = viewFrag1.findViewById(R.id.lnr_filter);
         lnr_sort = viewFrag1.findViewById(R.id.lnr_sorting);
         lnr_no_produk = viewFrag1.findViewById(R.id.lnr_no_produk);
+        btn_sorting_sekarang = viewFrag1.findViewById(R.id.btn_sorting_sekarang);
+        btn_filter_sekarang = viewFrag1.findViewById(R.id.btn_filter_sekarang);
+        rg_sorting = viewFrag1.findViewById(R.id.rg_sorting);
+
+        //filter identified
+        tv_harga_min_filter = viewFrag1.findViewById(R.id.tv_harga_min_filter);
+        tv_harga_max_filter = viewFrag1.findViewById(R.id.tv_harga_max_filter);
+        tv_ukuran_filter = viewFrag1.findViewById(R.id.tv_ukuran_filter);
+        seekbar_harga_filter = viewFrag1.findViewById(R.id.seekbar_harga_filter);
+        iv_minus_ukuran_filter = viewFrag1.findViewById(R.id.iv_minus_ukuran_filter);
+        iv_plus_ukuran_filter = viewFrag1.findViewById(R.id.iv_plus_ukuran_filter);
+        cb_merah = viewFrag1.findViewById(R.id.cb_merah);
+        cb_abu = viewFrag1.findViewById(R.id.cb_abu);
+        cb_putih = viewFrag1.findViewById(R.id.cb_putih);
+        cb_hitam = viewFrag1.findViewById(R.id.cb_hitam);
+
+
+        seekbar_harga_filter.setRangeValues(0,5000000);
+        seekbar_harga_filter.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+            @Override
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
+                sekbartouch = true;
+                MIN_PRICE = minValue;
+                MAX_PRICE = maxValue;
+                String str = NumberFormat.getNumberInstance(Locale.US).format(minValue);
+                String str1 = NumberFormat.getNumberInstance(Locale.US).format(maxValue);
+                tv_harga_min_filter.setText("Rp. "+ str);
+                tv_harga_max_filter.setText("Rp. "+ str1);
+
+            }
+        });
 
         if(kategori.equals("semua")){
             ApiInterface request = ApiRequest.getRetrofit().create(ApiInterface.class);
@@ -270,6 +327,7 @@ public class KatalogFragment extends Fragment {
 
         });
 
+
         return viewFrag1;
     }
 
@@ -291,7 +349,7 @@ public class KatalogFragment extends Fragment {
                             ProdukResponse jsonresponse = response.body();
                             int the_last = jsonresponse.getCurrentPage();
                             if(jsonresponse.getProduks() == null || the_last > last_page){
-                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
                             }else{
                                 produkArrayList.addAll(Arrays.asList(jsonresponse.getProduks()));
                             }
@@ -438,6 +496,100 @@ public class KatalogFragment extends Fragment {
                         lnr_filter.setVisibility(View.VISIBLE);
                         lnr_sort.setVisibility(View.GONE);
                         lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_up));
+
+                        iv_minus_ukuran_filter.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                if(tv_ukuran_filter.getText().toString().equals("-")){
+                                    tv_ukuran_filter.setText(String.valueOf(SHOE_SIZE));
+                                }else
+                                if(Integer.valueOf(tv_ukuran_filter.getText().toString()) > 39){
+                                    SHOE_SIZE -= 1;
+                                    tv_ukuran_filter.setText(String.valueOf(SHOE_SIZE));
+                                }
+                            }
+                        });
+
+                        iv_plus_ukuran_filter.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(tv_ukuran_filter.getText().toString().equals("-")){
+                                    tv_ukuran_filter.setText(String.valueOf(SHOE_SIZE));
+                                }else
+                                if(Integer.valueOf(tv_ukuran_filter.getText().toString()) < 42){
+                                    SHOE_SIZE += 1;
+                                    tv_ukuran_filter.setText(String.valueOf(SHOE_SIZE));
+                                }
+                            }
+                        });
+
+
+
+                        btn_filter_sekarang.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(cb_merah.isChecked()){
+                                    WARNA.add("Merah");
+                                }
+                                if(cb_abu.isChecked()){
+                                    WARNA.add("Abu-abu");
+                                }
+                                if(cb_hitam.isChecked()){
+                                    WARNA.add("Hitam");
+                                }
+                                if(cb_putih.isChecked()){
+                                    WARNA.add("Putih");
+                                }
+
+                                if(!(tv_ukuran_filter.getText().toString().equals("-"))) {
+                                    Log.d("filter","Ukuran diproses");
+                                    for (int i = 0; i < produkArrayList.size(); i++) {
+                                        if (produkArrayList.get(i).getUkuran() != Integer.valueOf(tv_ukuran_filter.getText().toString())){
+                                            produkArrayList.remove(i);
+                                        }
+                                    }
+                                }
+
+                                if(sekbartouch){
+                                    Log.d("filter","harga diproses");
+                                    for(int i=0; i<produkArrayList.size(); i++){
+                                        if(!(produkArrayList.get(i).getHarga() >= MIN_PRICE && produkArrayList.get(i).getHarga() <= MAX_PRICE)){
+                                            produkArrayList.remove(i);
+                                        }
+                                    }
+                                }
+
+                                if(WARNA.size() != 0){
+                                    Log.d("filter","warna diproses");
+                                    for(int i=0; i<produkArrayList.size(); i++){
+                                        boolean checkwarna = false;
+
+                                        for(int j=0; j< WARNA.size(); j++){
+                                            if(produkArrayList.get(i).getWarna().equals(WARNA.get(j))){
+                                                checkwarna = true;
+                                            }
+                                        }
+
+                                        if(!checkwarna){
+                                            produkArrayList.remove(i);
+                                        }
+                                    }
+                                }
+
+                                adapter.notifyDataSetChanged();
+
+                                Log.d("filter", "Ukuran : " + tv_ukuran_filter.getText().toString() + "/n"
+                                + "Harga : " + MIN_PRICE + ", " + MAX_PRICE +"/n"
+                                + "Warna : " + WARNA.get(0).toString());
+
+                                lnr_filter.setVisibility(View.GONE);
+                                lnr_sort.setVisibility(View.GONE);
+                                lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
+                                lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_down));
+                            }
+                        });
+
                     }
 
                     return true;
@@ -451,6 +603,37 @@ public class KatalogFragment extends Fragment {
                         lnr_sort.setVisibility(View.VISIBLE);
                         lnr_filter.setVisibility(View.GONE);
                         lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_up));
+
+                        btn_sorting_sekarang.setOnClickListener(new View.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
+                            @Override
+                            public void onClick(View view) {
+                                if(rg_sorting.getCheckedRadioButtonId() == R.id.sorting_rating) {
+                                    Collections.sort(produkArrayList, Produk.SortByRating);
+                                    adapter.notifyDataSetChanged();
+                                    lnr_sort.setVisibility(View.GONE);
+                                    lnr_filter.setVisibility(View.GONE);
+                                    lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down));
+                                    lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down));
+                                }else if(rg_sorting.getCheckedRadioButtonId() == R.id.sorting_terendah) {
+                                    Collections.sort(produkArrayList, Produk.SortByHargaTerendah);
+                                    adapter.notifyDataSetChanged();
+                                    lnr_sort.setVisibility(View.GONE);
+                                    lnr_filter.setVisibility(View.GONE);
+                                    lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down));
+                                    lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down));
+                                }else if(rg_sorting.getCheckedRadioButtonId() == R.id.sorting_tertinggi) {
+                                    Collections.sort(produkArrayList, Produk.SortByHargaTertinggi);
+                                    adapter.notifyDataSetChanged();
+                                    lnr_sort.setVisibility(View.GONE);
+                                    lnr_filter.setVisibility(View.GONE);
+                                    lnr_filter.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down));
+                                    lnr_sort.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down));
+                                }
+                            }
+                        });
+
+
                     }
                     return true;
             }

@@ -62,6 +62,7 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        this.realm = RealmController.with(this).getRealm();
         RealmResults<UserLogged> result = realm.where(UserLogged.class).findAll();
         realm.beginTransaction();
         final String remember_roken = result.get(0).getRemember_token();
@@ -88,7 +89,7 @@ public class CartActivity extends AppCompatActivity {
 
 
 
-        this.realm = RealmController.with(this).getRealm();
+
 
         RealmController.with(this).refresh();
         RealmResults<ProdukCart> results = realm.where(ProdukCart.class).findAll();

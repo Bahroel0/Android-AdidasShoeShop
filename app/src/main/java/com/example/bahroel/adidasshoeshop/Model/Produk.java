@@ -1,10 +1,13 @@
 package com.example.bahroel.adidasshoeshop.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class Produk implements Serializable{
+public class Produk implements Serializable, Comparable<Produk>{
     @SerializedName("id")
     private int id;
     @SerializedName("nama")
@@ -120,4 +123,48 @@ public class Produk implements Serializable{
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
     }
+
+    @Override
+    public int compareTo(@NonNull Produk produk) {
+        int compare = rating.compareTo(produk.rating);
+        if(compare == 0){
+            compare = Integer.compare(harga,produk.harga);
+        }
+        return compare;
+    }
+
+    public static Comparator<Produk> SortByRating = new Comparator<Produk>() {
+        @Override
+        public int compare(Produk produk, Produk produk1) {
+            int compare = produk.getRating().compareTo(produk1.getRating());
+            if(compare == 0){
+                compare = Integer.compare(produk.getHarga(), produk1.getHarga());
+            }
+            return compare;
+        }
+    };
+
+    public static Comparator<Produk> SortByHargaTerendah = new Comparator<Produk>() {
+        @Override
+        public int compare(Produk produk, Produk produk1) {
+            int compare = produk.getHarga()-produk1.getHarga();
+            if(compare == 0){
+                compare = Float.compare(produk.getRating(), produk1.getRating());
+            }
+            return compare;
+        }
+    };
+
+    public static Comparator<Produk> SortByHargaTertinggi = new Comparator<Produk>() {
+        @Override
+        public int compare(Produk produk, Produk produk1) {
+            int compare = produk1.getHarga()-produk.getHarga();
+            if(compare == 0){
+                compare = Float.compare(produk.getRating(), produk1.getRating());
+            }
+            return compare;
+        }
+    };
+
+
 }
