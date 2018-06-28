@@ -55,6 +55,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -543,45 +544,44 @@ public class KatalogFragment extends Fragment {
                                 }
 
                                 if(!(tv_ukuran_filter.getText().toString().equals("-"))) {
-                                    Log.d("filter","Ukuran diproses");
-                                    for (int i = 0; i < produkArrayList.size(); i++) {
-                                        if (produkArrayList.get(i).getUkuran() != Integer.valueOf(tv_ukuran_filter.getText().toString())){
-                                            produkArrayList.remove(i);
+                                    Iterator<Produk> produk = produkArrayList.iterator();
+                                    while(produk.hasNext()){
+                                        Produk p = produk.next();
+                                        if (p.getUkuran() != Integer.valueOf(tv_ukuran_filter.getText().toString())){
+                                            produk.remove();
                                         }
                                     }
                                 }
 
                                 if(sekbartouch){
-                                    Log.d("filter","harga diproses");
-                                    for(int i=0; i<produkArrayList.size(); i++){
-                                        if(!(produkArrayList.get(i).getHarga() >= MIN_PRICE && produkArrayList.get(i).getHarga() <= MAX_PRICE)){
-                                            produkArrayList.remove(i);
+                                    Iterator<Produk> produk = produkArrayList.iterator();
+                                    while(produk.hasNext()){
+                                        Produk p = produk.next();
+                                        if(!(p.getHarga() >= MIN_PRICE && p.getHarga() <= MAX_PRICE)){
+                                            produk.remove();
                                         }
                                     }
+
                                 }
 
                                 if(WARNA.size() != 0){
-                                    Log.d("filter","warna diproses");
-                                    for(int i=0; i<produkArrayList.size(); i++){
+                                    Iterator<Produk> produk = produkArrayList.iterator();
+                                    while(produk.hasNext()){
                                         boolean checkwarna = false;
-
+                                        Produk p = produk.next();
                                         for(int j=0; j< WARNA.size(); j++){
-                                            if(produkArrayList.get(i).getWarna().equals(WARNA.get(j))){
+                                            if(p.getWarna().equals(WARNA.get(j))){
                                                 checkwarna = true;
                                             }
                                         }
-
                                         if(!checkwarna){
-                                            produkArrayList.remove(i);
+                                            produk.remove();
                                         }
+
                                     }
                                 }
 
                                 adapter.notifyDataSetChanged();
-
-                                Log.d("filter", "Ukuran : " + tv_ukuran_filter.getText().toString() + "/n"
-                                + "Harga : " + MIN_PRICE + ", " + MAX_PRICE +"/n"
-                                + "Warna : " + WARNA.get(0).toString());
 
                                 lnr_filter.setVisibility(View.GONE);
                                 lnr_sort.setVisibility(View.GONE);
